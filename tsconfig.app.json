@@ -22,7 +22,10 @@
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
     "paths": {
-      "@/*": ["./src/*"]
+      "@/*": ["./src/*"],
+      "@features/*": ["./src/features/*"],
+      "@components/*": ["./src/shared/components/*"],
+      "@services/*": ["./src/shared/services/*"]
     }
   },
   "include": ["src"]
