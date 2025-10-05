@@ -1,0 +1,16 @@
+@import 'tailwindcss';
+
+@theme {
+  --color-dark: #1c1c1e;
+  --color-dark-smooth: #232227;
+  --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
+}
+
+:root {
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+
+  @apply text-white bg-dark;
+}
