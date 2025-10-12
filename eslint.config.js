@@ -5,6 +5,7 @@ import reactRefresh from 'eslint-plugin-react-refresh'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
+import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default defineConfig([
   globalIgnores(['dist']),
@@ -17,6 +18,7 @@ export default defineConfig([
       reactRefresh.configs.vite,
       importPlugin.flatConfigs.recommended,
       importPlugin.flatConfigs.typescript,
+      pluginQuery.configs['flat/recommended']
     ],
     languageOptions: {
       ecmaVersion: 2020,
@@ -35,8 +37,10 @@ export default defineConfig([
             'builtin',
             'external',
             'internal',
-            'parent',
-            'sibling',
+            [
+              'parent',
+              'sibling',
+            ],
             'index',
           ],
           'newlines-between': 'always',
@@ -44,9 +48,37 @@ export default defineConfig([
             order: 'asc',
             caseInsensitive: true,
           },
+          "distinctGroup": false,
+          "pathGroups": [
+            {
+              "pattern": "react",
+              "group": "external",
+              "position": "before",
+            },
+            {
+              pattern: './constants',
+              group: 'object',
+              position: 'after',
+            }
+          ],
+          pathGroupsExcludedImportTypes: ['builtin']
         },
       ],
       '@typescript-eslint/no-unused-vars': 'error',
+    },
+    settings: {
+      'import/resolver': {
+        typescript: {
+          alwaysTryTypes: true,
+          project: './tsconfig.json'
+        },
+        node: {
+          extensions: ['.js', '.jsx', '.ts', '.tsx']
+        }
+      },
+      'import/parsers': {
+        '@typescript-eslint/parser': ['.ts', '.tsx']
+      }
     },
     ignores: ['node_modules/', 'dist/', 'coverage/', 'public/', '*.min.js'],
   },
