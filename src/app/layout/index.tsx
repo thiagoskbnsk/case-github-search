@@ -1,13 +1,9 @@
-import type { ReactNode } from 'react'
+import { Providers } from '../providers'
 
-type AppLayoutProps = {
-  children: ReactNode
-}
-
-export const AppLayout = ({ children }: AppLayoutProps) => {
+export const AppLayout = ({ children }: React.PropsWithChildren) => {
   return (
-    <div className="app-container">
-      <main>{children}</main>
-    </div>
+    <Providers>
+      <main className="container mx-auto px-4 py-28">{children}</main>
+    </Providers>
   )
 }
