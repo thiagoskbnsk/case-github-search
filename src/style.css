@@ -4,6 +4,9 @@
   --color-dark: #1c1c1e;
   --color-dark-smooth: #232227;
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --color-dark-smooth-contrast: #302f35;
+  --shadow-color: rgba(0, 0, 0, 0.4);
 }
 
 :root {
@@ -12,5 +15,15 @@
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
-  @apply text-white bg-dark;
+  @apply bg-dark text-white;
+}
+
+@layer components {
+  .cc-card {
+    @apply rounded-md;
+    @apply bg-dark-smooth;
+
+    box-shadow: 0px 0px 6px var(--shadow-color);
+    border: 1px solid var(--color-dark-smooth-contrast);
+  }
 }
