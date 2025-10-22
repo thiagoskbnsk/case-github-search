@@ -1,93 +1,91 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import React, {useCallback, useMemo, useState} from 'react'
+import {useQuery} from '@tanstack/react-query'
 
-import type { TSelectOption } from '@shared/components'
-import { fetchSearchResults } from '@shared/services/github/endpoints/repositories.service'
+import {DEFAULT_SEARCH_RESULTS_DATA} from '@shared/services/github/repositories/constants'
+import {fetchSearchResults} from '@shared/services/github/repositories/service'
 
-import { GithubSearchContext } from './context'
-import {
-  DEFAULT_LANGUAGE_FILTER,
-  selectLanguageOptions,
-  selectHasNoResults,
-  selectFilteredRepositories,
-  selectTotalCount,
-  selectRepositories,
-} from './selectors'
-import type { SortFilter } from './types'
-import { GITHUB_SEARCH_CONFIG } from '../../constants/config'
-import { SORT_OPTIONS } from '../../constants/sort-options'
+import {GithubSearchContext} from './context'
+import {selectLanguageOptions, handleFilterAndSort, findRepositoryById} from './selectors'
+import {GITHUB_SEARCH_CONFIG} from '../../constants/config'
+import {DEFAULT_LANGUAGE_FILTER, SORT_OPTIONS} from '../../constants/filters'
 
-export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
-  const [inputSearchValue, setInputSearchValue] = useState('')
+import type {SortFilter} from './types'
+import type {Option} from '@shared/components'
+
+export const GithubSearchProvider = ({children}: React.PropsWithChildren) => {
   const [lastSearched, setLastSearched] = useState('')
   const [sortFilter, setSortFilter] = useState<SortFilter>(SORT_OPTIONS[0])
-  const [languageFilter, setLanguageFilter] = useState<TSelectOption>(
-    DEFAULT_LANGUAGE_FILTER
-  )
+  const [languageFilter, setLanguageFilter] = useState<Option>(DEFAULT_LANGUAGE_FILTER)
 
-  const { data, isLoading, error } = useQuery({
+  const {
+    data = DEFAULT_SEARCH_RESULTS_DATA,
+    isLoading,
+    error,
+    promise: searchPromise,
+  } = useQuery({
     queryKey: ['github-search', lastSearched],
     queryFn: () => fetchSearchResults(lastSearched),
     staleTime: GITHUB_SEARCH_CONFIG.cache.ttl,
     enabled: Boolean(lastSearched),
+    experimental_prefetchInRender: true,
   })
 
-  const repositories = useMemo(() => selectRepositories(data), [data])
-  const totalCount = useMemo(() => selectTotalCount(data), [data])
+  const {repositories, totalCount} = data
+
   const noResults = useMemo(
-    () => selectHasNoResults(lastSearched, data?.count),
-    [lastSearched, data?.count]
-  )
-  const languageOptions = useMemo(
-    () => selectLanguageOptions(repositories),
-    [repositories]
-  )
-  const filteredRepositories = useMemo(
-    () => selectFilteredRepositories(repositories, languageFilter, sortFilter),
-    [repositories, languageFilter, sortFilter]
+    () => Boolean(lastSearched) && totalCount === 0 && !error && !isLoading,
+    [lastSearched, totalCount, error, isLoading]
   )
 
-  const clearSearch = useCallback(() => {
-    setInputSearchValue('')
-    setLastSearched('')
-  }, [])
+  const languageOptions = useMemo(() => selectLanguageOptions(repositories), [repositories])
+
+  const filteredRepositories = useMemo(() => {
+    return handleFilterAndSort(repositories, {
+      filteredBy: languageFilter.value,
+      sortedBy: sortFilter.value,
+    })
+  }, [repositories, languageFilter, sortFilter])
 
   const clearFilters = useCallback(() => {
     setSortFilter(SORT_OPTIONS[0])
     setLanguageFilter(DEFAULT_LANGUAGE_FILTER)
   }, [])
 
-  const handleSearch = useCallback(() => {
-    if (inputSearchValue !== lastSearched && inputSearchValue.trim()) {
-      clearFilters()
-      setLastSearched(inputSearchValue.trim())
-    }
-  }, [inputSearchValue, lastSearched, clearFilters])
+  const handleSearch = useCallback(
+    (inputSearchValue: string) => {
+      const shouldDoANewSearch = inputSearchValue && inputSearchValue !== lastSearched
+
+      if (shouldDoANewSearch) {
+        clearFilters()
+        setLastSearched(inputSearchValue)
+      }
+    },
+    [lastSearched, clearFilters]
+  )
+
+  const getRepositoryById = useCallback(
+    (repositoryId: number) => findRepositoryById(filteredRepositories, repositoryId),
+    [filteredRepositories]
+  )
 
   const value = useMemo(
     () => ({
-      // State
-      inputSearchValue,
       sortFilter,
       languageFilter,
-
-      // Derived state
       repositories: filteredRepositories,
       totalCount,
       isLoading,
       error,
       noResults,
       languageOptions,
-
-      // Actions
-      setInputSearchValue,
       setSortFilter,
       setLanguageFilter,
       handleSearch,
-      clearSearch,
+      searchPromise,
+      lastSearched,
+      getRepositoryById,
     }),
     [
-      inputSearchValue,
       sortFilter,
       languageFilter,
       filteredRepositories,
@@ -96,17 +94,14 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       error,
       noResults,
       languageOptions,
-      setInputSearchValue,
       setSortFilter,
       setLanguageFilter,
       handleSearch,
-      clearSearch,
+      searchPromise,
+      lastSearched,
+      getRepositoryById,
     ]
   )
 
-  return (
-    <GithubSearchContext.Provider value={value}>
-      {children}
-    </GithubSearchContext.Provider>
-  )
+  return <GithubSearchContext.Provider value={value}>{children}</GithubSearchContext.Provider>
 }

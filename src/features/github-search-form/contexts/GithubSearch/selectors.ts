@@ -1,20 +1,15 @@
-import type { TSelectOption, Option } from '@shared/components'
-import type { SearchResultsResponse } from '@shared/services/github/endpoints/repositories.service'
+import {DEFAULT_LANGUAGE_FILTER, type SortOptionValues} from '../../constants/filters'
 
-export const DEFAULT_LANGUAGE_FILTER: TSelectOption = {
-  id: 'all',
-  label: 'All',
-  value: '',
-}
+import type {Filters} from '../../pages/SearchGithub/SearchResults/ResultsList/types'
+import type {Option} from '@shared/components'
+import type {RepositoryUI} from '@shared/services/github/repositories/types'
 
 /**
  * Selects unique language options from repositories
  */
-export const selectLanguageOptions = (
-  repositories: SearchResultsResponse['items']
-): Option[] => {
+export const selectLanguageOptions = (repositories: RepositoryUI[]): Option[] => {
   const uniqueLanguages = repositories
-    .map(repo => repo.language)
+    .map(repository => repository.language)
     .filter((language): language is string => Boolean(language))
 
   const uniqueLanguagesSet = new Set(uniqueLanguages)
@@ -25,74 +20,41 @@ export const selectLanguageOptions = (
     value: language?.toLowerCase(),
   }))
 
-  return [
-    {
-      id: 'all',
-      label: 'All',
-      value: '',
-    },
-    ...languagesList,
-  ]
+  return [DEFAULT_LANGUAGE_FILTER, ...languagesList]
 }
 
-/**
- * Checks if there are no search results
- */
-export const selectHasNoResults = (
-  lastSearched: string,
-  count?: number
-): boolean => {
-  return Boolean(lastSearched) && count === 0
+const filterRepositories = (repositories: RepositoryUI[], filteredBy: string) => {
+  if (!filteredBy) return repositories
+
+  return repositories.filter(repository => repository.language?.toLowerCase() === filteredBy)
+}
+
+const sortRepositories = (repositories: RepositoryUI[], sortedBy: SortOptionValues) => {
+  switch (sortedBy) {
+    case 'stargazed':
+      return repositories.sort((a, b) => b.stars - a.stars)
+    default:
+      return repositories
+  }
 }
 
 /**
  * Selects repositories based on language and sort filters
  */
-export const selectFilteredRepositories = (
-  repositories: SearchResultsResponse['items'],
-  languageFilter: TSelectOption,
-  sortFilter: TSelectOption
-): SearchResultsResponse['items'] => {
-  let filteredRepositories = [...repositories]
+export const handleFilterAndSort = (repositories: RepositoryUI[], {filteredBy, sortedBy}: Filters) => {
+  const repositoriesCopy = [...repositories]
 
-  // Apply language filter
-  if (languageFilter?.value && languageFilter.value !== '') {
-    filteredRepositories = filteredRepositories.filter(
-      repo => repo.language?.toLowerCase() === languageFilter.value
-    )
-  }
+  const filteredList = filterRepositories(repositoriesCopy, filteredBy)
+  const sortedList = sortRepositories(filteredList, sortedBy)
 
-  // Apply sorting (if needed - GitHub API usually handles sorting)
-  // This is for client-side sorting if needed
-  switch (sortFilter?.value) {
-    case 'stars':
-      return filteredRepositories.sort(
-        (a, b) => b.stargazers_count - a.stargazers_count
-      )
-    default:
-      return filteredRepositories
-  }
+  return sortedList
 }
 
 /**
- * Selects the total count from search results
+ * Finds a repository by its ID
  */
-export const selectTotalCount = (data?: SearchResultsResponse): number => {
-  return data?.count || 0
-}
+export const findRepositoryById = (repositories: RepositoryUI[], repositoryId: number): RepositoryUI | null => {
+  const repository = repositories.find(repo => repo.id === repositoryId)
 
-/**
- * Selects repositories from search results
- */
-export const selectRepositories = (
-  data?: SearchResultsResponse
-): SearchResultsResponse['items'] => {
-  return data?.items || []
-}
-
-/**
- * Checks if search should be enabled
- */
-export const selectIsSearchEnabled = (lastSearched: string): boolean => {
-  return Boolean(lastSearched.trim())
+  return repository || null
 }

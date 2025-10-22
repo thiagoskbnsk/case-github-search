@@ -1,40 +1,25 @@
-import { useContextSelector } from 'use-context-selector'
+import {useContextSelector} from 'use-context-selector'
 
-import { GithubSearchContext } from './context'
-import type { GithubSearchContextType } from './types'
+import {GithubSearchContext} from './context'
 
-type Selector<T> = (state: AdditionalSelectors) => T
+import type {Selector} from './types'
 
-interface AdditionalSelectors extends GithubSearchContextType {
-  shouldShowResults: boolean
-}
-
-/** Main selector hook **/
-export const useGithubSearchContext = <T>(selector: Selector<T>) => {
-  return useContextSelector(GithubSearchContext, state =>
-    selector({
-      ...state,
-      // Additional computed properties for UI
-      shouldShowResults:
-        !state.isLoading && !state.error && state.totalCount > 0,
-    })
-  )
-}
+export const useGithubSearchContext = <T>(selector: Selector<T>) =>
+  useContextSelector(GithubSearchContext, state => selector(state))
 
 export const useSearchResults = () =>
   useGithubSearchContext(state => ({
-    isLoading: state.isLoading,
     error: state.error,
     noResults: state.noResults,
-    shouldShowResults: state.shouldShowResults,
+    searchPromise: state.searchPromise,
+    shouldShowResults: Boolean(state.lastSearched),
   }))
 
 export const useSearchInput = () =>
   useGithubSearchContext(state => ({
-    inputSearchValue: state.inputSearchValue,
-    setInputSearchValue: state.setInputSearchValue,
     handleSearch: state.handleSearch,
     isLoading: state.isLoading,
+    lastSearched: state.lastSearched,
   }))
 
 export const useSearchFilters = () =>
@@ -51,4 +36,9 @@ export const useResultsList = () =>
     repositories: state.repositories,
     sortFilter: state.sortFilter,
     languageFilter: state.languageFilter,
+  }))
+
+export const useRepositoryDetails = () =>
+  useGithubSearchContext(state => ({
+    getRepositoryById: state.getRepositoryById,
   }))

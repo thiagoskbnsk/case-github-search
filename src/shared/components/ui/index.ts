@@ -1,3 +1,5 @@
 export * from './Button'
 export * from './PanelNotification'
 export * from './Loading'
+export * from './SuspenseWrapper'
+export * from './RedirectRoute'

@@ -1,27 +1,28 @@
-import type { TSelectOption, Option } from '@shared/components'
-import type { SearchResultsResponse } from '@shared/services/github/endpoints/repositories.service'
+import type {SortOptionValues} from '../../constants/filters'
+import type {Option} from '@shared/components'
+import type {RepositoryUI} from '@shared/services/github/repositories/types'
 
-import type { SortOptionValues } from '../../constants/sort-options'
-
-export type SortFilter = TSelectOption<SortOptionValues>
+export type SortFilter = Option<SortOptionValues>
 export type GithubSearchContextType = {
   // State
-  inputSearchValue: string
   sortFilter: SortFilter
-  languageFilter: TSelectOption
-
+  languageFilter: Option
   // Derived state
-  repositories: SearchResultsResponse['items']
+  repositories: RepositoryUI[]
   totalCount: number
   isLoading: boolean
   error: Error | null
   noResults: boolean
   languageOptions: Option[]
-
   // Actions
-  setInputSearchValue: (value: string) => void
   setSortFilter: (sort: SortFilter) => void
-  setLanguageFilter: (language: TSelectOption) => void
-  handleSearch: () => void
-  clearSearch: () => void
+  setLanguageFilter: (language: Option) => void
+  handleSearch: (inputSearch: string) => void
+
+  searchPromise: Promise<{repositories: RepositoryUI[]; totalCount: number}>
+  lastSearched: string
+  getRepositoryById: (repositoryId: number) => RepositoryUI | null
 }
+
+export type AdditionalSelectors = GithubSearchContextType
+export type Selector<T> = (state: AdditionalSelectors) => T
