@@ -1,3 +1,7 @@
+/**
+ * TODO:
+ * refactor
+ */
 export const GithubIcon = ({ size = 16 }: { size?: number }) => (
   <svg width={size} height={size} role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
     <title>GitHub</title>

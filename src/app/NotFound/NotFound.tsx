@@ -2,10 +2,7 @@ import { Link, useLocation } from 'react-router'
 
 import { DEFAULT_TEXTS } from './placeholders'
 
-type NotFoundLocationProps = {
-  title?: string
-  description?: string
-}
+import type { NotFoundLocationProps } from './types'
 
 export const NotFound = () => {
   const location = useLocation()

@@ -2,6 +2,9 @@ import React from 'react'
 import { ExclamationCircleIcon, InformationCircleIcon } from '@heroicons/react/16/solid'
 import { clsx } from 'clsx'
 
+/**
+ * TODO: refactor
+ */
 type PanelNotificationProps = React.PropsWithChildren<{
   variant: 'error' | 'warning'
 }>

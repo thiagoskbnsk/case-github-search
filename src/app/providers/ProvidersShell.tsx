@@ -1,5 +1,5 @@
 import { ReactQueryProvider } from './ReactQuery'
 
-export const Providers = ({ children }: React.PropsWithChildren) => {
+export const ProvidersShell = ({ children }: React.PropsWithChildren) => {
   return <ReactQueryProvider>{children}</ReactQueryProvider>
 }

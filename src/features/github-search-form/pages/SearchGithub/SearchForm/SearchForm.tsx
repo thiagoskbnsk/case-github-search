@@ -12,6 +12,10 @@ import { useSearchInput } from '../../../contexts/GithubSearch'
 
 import type { SearchFormData } from './types'
 
+/**
+ * TODO:
+ * create custom hook for all logic here
+ */
 export const SearchForm = () => {
   const { handleSearch, isLoading, lastSearched } = useSearchInput()
   const {

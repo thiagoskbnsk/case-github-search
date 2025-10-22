@@ -2,6 +2,7 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router'
 
 import { Card } from './Card'
+// TODO: too long imports (find for more on other components)
 import { useResultsList } from '../../../../contexts/GithubSearch'
 
 export const ResultsList = () => {

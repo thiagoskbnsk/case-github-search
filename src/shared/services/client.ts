@@ -5,6 +5,9 @@ import { BASE_CONFIG, CUSTOM_ERROR_CONFIGS, CUSTOM_ERROR_STATUS } from './consta
 
 import type { ApiError, ApiResponse, RequestConfig } from './types'
 
+/**
+ * TODO: clean code
+ */
 export class HttpClient {
   private baseURL: string
   private defaultConfig: RequestConfig

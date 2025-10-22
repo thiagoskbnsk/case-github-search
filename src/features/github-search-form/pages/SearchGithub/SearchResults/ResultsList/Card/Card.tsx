@@ -16,6 +16,7 @@ export const Card = memo(
     repository: { name, owner, formattedStars, displayDescription, displayLanguage, hasDescription, hasLanguage, url },
     onClick,
   }: CardProps) => {
+    // TODO: this code repeats in other component
     const languageColor = hasLanguage ? 'cyan' : 'gray'
 
     return (

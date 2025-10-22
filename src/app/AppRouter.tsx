@@ -14,7 +14,6 @@ export const AppRouter = () => {
         <Routes>
           <Route element={<AppLayout />}>
             <Route path='*' element={<GithubSearchFormRouter />} />
-
             <Route path='/404' element={<NotFoundPage />} />
             <Route path='*' element={<RedirectRoute to='/404' statusCode={404} />} />
           </Route>

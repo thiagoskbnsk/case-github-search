@@ -1,3 +1,7 @@
+/**
+ * TODO:
+ * refactor
+ */
 export const GITHUB_SEARCH_CONFIG = {
   api: {
     baseUrl: 'https://api.github.com',

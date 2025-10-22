@@ -15,7 +15,7 @@ const GithubSearchForm = () => {
         <Route element={<Layout />}>
           <Route index element={<SearchGithubPage />} />
           <Route path='repository/:repositoryId' element={<DetailsGithubPage />} />
-
+          {/* TODO: is this redirect, redirecting again? */}
           <Route path='*' element={<RedirectRoute to='/404' statusCode={404} />} />
         </Route>
       </Routes>

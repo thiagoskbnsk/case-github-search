@@ -4,6 +4,10 @@ import { clsx } from 'clsx'
 
 import type { SelectProps, Option } from './types'
 
+/**
+ * TODO:
+ * refactor, so much classes
+ */
 export const Select = <T extends string = string>({ onChange, value, options, placeholder }: SelectProps<T>) => {
   return (
     <Combobox<Option<T>> immediate value={value} onChange={option => onChange(option as Option<T>)}>
