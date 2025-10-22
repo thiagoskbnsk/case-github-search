@@ -1,5 +1,5 @@
-import {forwardRef, useId} from 'react'
-import {clsx} from 'clsx'
+import { forwardRef, useId } from 'react'
+import { clsx } from 'clsx'
 
 type TextFieldProps = {
   leftIcon?: React.ReactNode
@@ -16,7 +16,18 @@ type TextFieldProps = {
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (
-    {leftIcon, placeholder, label, onChange, name, disabled, error, id: providedId, className, loading}: TextFieldProps,
+    {
+      leftIcon,
+      placeholder,
+      label,
+      onChange,
+      name,
+      disabled,
+      error,
+      id: providedId,
+      className,
+      loading,
+    }: TextFieldProps,
     ref
   ) => {
     const generatedId = useId()

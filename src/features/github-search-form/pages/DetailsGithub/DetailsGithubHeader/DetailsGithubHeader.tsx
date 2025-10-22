@@ -1,12 +1,12 @@
-import {memo} from 'react'
-import {Link} from 'react-router'
+import { memo } from 'react'
+import { Link } from 'react-router'
 
-import {DEFAULT_TEXTS} from './placeholders'
-import {GithubIcon} from '../../../components'
+import { DEFAULT_TEXTS } from './placeholders'
+import { GithubIcon } from '../../../components'
 
-import type {DetailsGithubHeaderProps} from './types'
+import type { DetailsGithubHeaderProps } from './types'
 
-export const DetailsGithubHeader = memo(({repositoryUrl, ownerName, repositoryName}: DetailsGithubHeaderProps) => {
+export const DetailsGithubHeader = memo(({ repositoryUrl, ownerName, repositoryName }: DetailsGithubHeaderProps) => {
   return (
     <>
       <Link

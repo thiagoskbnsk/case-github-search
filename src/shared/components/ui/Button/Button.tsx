@@ -1,6 +1,6 @@
-import type {ButtonProps} from './Button.types'
+import type { ButtonProps } from './Button.types'
 
-export const Button = ({children, onClick, className, disabled, type = 'button'}: ButtonProps) => {
+export const Button = ({ children, onClick, className, disabled, type = 'button' }: ButtonProps) => {
   return (
     <button
       type={type}

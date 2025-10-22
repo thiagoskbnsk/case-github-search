@@ -1,7 +1,7 @@
-import {lazy, Suspense} from 'react'
-import {BrowserRouter, Routes, Route} from 'react-router'
+import { lazy, Suspense } from 'react'
+import { BrowserRouter, Routes, Route } from 'react-router'
 
-import {RedirectRoute} from '@shared/components'
+import { RedirectRoute } from '@shared/components'
 
 const AppLayout = lazy(() => import('./AppLayout'))
 const NotFoundPage = lazy(() => import('./NotFound'))

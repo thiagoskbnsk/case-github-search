@@ -1,10 +1,10 @@
-import {memo} from 'react'
+import { memo } from 'react'
 
-import {COUNTER_ICONS_MAP} from './constants'
+import { COUNTER_ICONS_MAP } from './constants'
 
-import type {CounterCardProps} from './types'
+import type { CounterCardProps } from './types'
 
-export const CounterCard = memo(({counter}: CounterCardProps) => {
+export const CounterCard = memo(({ counter }: CounterCardProps) => {
   const Icon = COUNTER_ICONS_MAP[counter.key]
 
   return (

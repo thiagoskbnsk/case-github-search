@@ -1,31 +1,31 @@
-import {useCallback, useMemo} from 'react'
-import {MagnifyingGlassIcon} from '@heroicons/react/16/solid'
-import {zodResolver} from '@hookform/resolvers/zod'
-import {useForm, useWatch} from 'react-hook-form'
+import { useCallback, useMemo } from 'react'
+import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
+import { zodResolver } from '@hookform/resolvers/zod'
+import { useForm, useWatch } from 'react-hook-form'
 
-import {TextField} from '@shared/components'
-import {Button} from '@shared/components/ui'
+import { TextField } from '@shared/components'
+import { Button } from '@shared/components/ui'
 
-import {DEFAULT_TEXTS} from './placeholders'
-import {searchFormSchema} from './schemas'
-import {useSearchInput} from '../../../contexts/GithubSearch'
+import { DEFAULT_TEXTS } from './placeholders'
+import { searchFormSchema } from './schemas'
+import { useSearchInput } from '../../../contexts/GithubSearch'
 
-import type {SearchFormData} from './types'
+import type { SearchFormData } from './types'
 
 export const SearchForm = () => {
-  const {handleSearch, isLoading, lastSearched} = useSearchInput()
+  const { handleSearch, isLoading, lastSearched } = useSearchInput()
   const {
     register,
     handleSubmit,
     control,
-    formState: {isSubmitting, errors},
+    formState: { isSubmitting, errors },
   } = useForm<SearchFormData>({
     mode: 'onSubmit',
     resolver: zodResolver(searchFormSchema),
-    defaultValues: {search: lastSearched},
+    defaultValues: { search: lastSearched },
   })
 
-  const searchFieldValue = useWatch({name: 'search', control})
+  const searchFieldValue = useWatch({ name: 'search', control })
   const onSubmit = useCallback((data: SearchFormData) => handleSearch(data.search), [handleSearch])
 
   const disableButton = useMemo(

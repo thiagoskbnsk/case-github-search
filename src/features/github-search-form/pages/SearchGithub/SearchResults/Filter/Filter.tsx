@@ -8,7 +8,7 @@ export const Filter = () => {
   const { setSortFilter, setLanguageFilter, languageFilter, sortFilter, languageOptions } = useSearchFilters()
 
   return (
-    <div className="flex w-full justify-between gap-4">
+    <div className='flex w-full justify-between gap-4'>
       <Select<SortOptionValues>
         options={SORT_OPTIONS}
         onChange={option => setSortFilter(option)}

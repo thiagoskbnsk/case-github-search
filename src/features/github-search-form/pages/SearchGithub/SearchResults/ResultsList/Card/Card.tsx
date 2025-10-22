@@ -1,10 +1,10 @@
-import {memo} from 'react'
-import {StarIcon} from '@heroicons/react/16/solid'
-import {clsx} from 'clsx'
+import { memo } from 'react'
+import { StarIcon } from '@heroicons/react/16/solid'
+import { clsx } from 'clsx'
 
-import {GithubIcon} from '@features/github-search-form/components'
+import { GithubIcon } from '@features/github-search-form/components'
 
-import type {RepositoryUI} from '@shared/services/github/repositories/types'
+import type { RepositoryUI } from '@shared/services/github/repositories/types'
 
 type CardProps = {
   repository: RepositoryUI
@@ -13,7 +13,7 @@ type CardProps = {
 
 export const Card = memo(
   ({
-    repository: {name, owner, formattedStars, displayDescription, displayLanguage, hasDescription, hasLanguage, url},
+    repository: { name, owner, formattedStars, displayDescription, displayLanguage, hasDescription, hasLanguage, url },
     onClick,
   }: CardProps) => {
     const languageColor = hasLanguage ? 'cyan' : 'gray'

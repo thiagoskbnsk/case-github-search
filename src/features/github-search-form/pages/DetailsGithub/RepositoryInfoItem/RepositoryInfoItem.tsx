@@ -1,9 +1,9 @@
-import {memo, useMemo} from 'react'
-import {clsx} from 'clsx'
+import { memo, useMemo } from 'react'
+import { clsx } from 'clsx'
 
-import type {RepositoryInfoItemProps} from './types'
+import type { RepositoryInfoItemProps } from './types'
 
-export const RepositoryInfoItem = memo(({info, repository}: RepositoryInfoItemProps) => {
+export const RepositoryInfoItem = memo(({ info, repository }: RepositoryInfoItemProps) => {
   const languageColor = repository?.hasLanguage ? 'cyan' : 'gray'
 
   const getValueContent = useMemo(() => {
@@ -21,7 +21,7 @@ export const RepositoryInfoItem = memo(({info, repository}: RepositoryInfoItemPr
 
     if (info.label === 'Description') {
       return (
-        <span className={clsx('break-words', {'text-neutral-600 italic': !repository.hasDescription})}>
+        <span className={clsx('break-words', { 'text-neutral-600 italic': !repository.hasDescription })}>
           {info.value}
         </span>
       )

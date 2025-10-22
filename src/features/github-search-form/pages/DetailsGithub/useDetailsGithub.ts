@@ -1,15 +1,15 @@
-import {useMemo} from 'react'
-import {useParams} from 'react-router'
+import { useMemo } from 'react'
+import { useParams } from 'react-router'
 
-import {validateParams, getCountersMap, getRepositoryInfoMap} from './selectors'
-import {useRepositoryDetails} from '../../contexts/GithubSearch'
+import { validateParams, getCountersMap, getRepositoryInfoMap } from './selectors'
+import { useRepositoryDetails } from '../../contexts/GithubSearch'
 
-import type {UseDetailsGithubResult} from './types'
+import type { UseDetailsGithubResult } from './types'
 
 export function useDetailsGithub(): UseDetailsGithubResult<true> | UseDetailsGithubResult<false>
 export function useDetailsGithub(): UseDetailsGithubResult {
   const params = useParams()
-  const {getRepositoryById} = useRepositoryDetails()
+  const { getRepositoryById } = useRepositoryDetails()
 
   const validatedParams = useMemo(() => validateParams(params), [params])
 

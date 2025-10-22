@@ -1,8 +1,8 @@
-import {useContextSelector} from 'use-context-selector'
+import { useContextSelector } from 'use-context-selector'
 
-import {GithubSearchContext} from './context'
+import { GithubSearchContext } from './context'
 
-import type {Selector} from './types'
+import type { Selector } from './types'
 
 export const useGithubSearchContext = <T>(selector: Selector<T>) =>
   useContextSelector(GithubSearchContext, state => selector(state))

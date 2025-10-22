@@ -1,10 +1,10 @@
-import {Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions} from '@headlessui/react'
-import {ChevronDownIcon} from '@heroicons/react/20/solid'
-import {clsx} from 'clsx'
+import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOptions } from '@headlessui/react'
+import { ChevronDownIcon } from '@heroicons/react/20/solid'
+import { clsx } from 'clsx'
 
-import type {SelectProps, Option} from './types'
+import type { SelectProps, Option } from './types'
 
-export const Select = <T extends string = string>({onChange, value, options, placeholder}: SelectProps<T>) => {
+export const Select = <T extends string = string>({ onChange, value, options, placeholder }: SelectProps<T>) => {
   return (
     <Combobox<Option<T>> immediate value={value} onChange={option => onChange(option as Option<T>)}>
       <div className='relative'>

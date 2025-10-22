@@ -1,11 +1,11 @@
-import {useCallback} from 'react'
-import {useNavigate} from 'react-router'
+import { useCallback } from 'react'
+import { useNavigate } from 'react-router'
 
-import {Card} from './Card'
-import {useResultsList} from '../../../../contexts/GithubSearch'
+import { Card } from './Card'
+import { useResultsList } from '../../../../contexts/GithubSearch'
 
 export const ResultsList = () => {
-  const {repositories} = useResultsList()
+  const { repositories } = useResultsList()
   const navigate = useNavigate()
 
   const handleClick = useCallback(

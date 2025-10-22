@@ -1,4 +1,4 @@
-import type {MappedData} from '../types'
+import type { MappedData } from '../types'
 
 export type CounterCardProps = {
   counter: MappedData

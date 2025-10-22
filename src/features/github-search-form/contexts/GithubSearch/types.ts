@@ -1,6 +1,6 @@
-import type {SortOptionValues} from '../../constants/filters'
-import type {Option} from '@shared/components'
-import type {RepositoryUI} from '@shared/services/github/repositories/types'
+import type { SortOptionValues } from '../../constants/filters'
+import type { Option } from '@shared/components'
+import type { RepositoryUI } from '@shared/services/github/repositories/types'
 
 export type SortFilter = Option<SortOptionValues>
 export type GithubSearchContextType = {
@@ -19,7 +19,7 @@ export type GithubSearchContextType = {
   setLanguageFilter: (language: Option) => void
   handleSearch: (inputSearch: string) => void
 
-  searchPromise: Promise<{repositories: RepositoryUI[]; totalCount: number}>
+  searchPromise: Promise<{ repositories: RepositoryUI[]; totalCount: number }>
   lastSearched: string
   getRepositoryById: (repositoryId: number) => RepositoryUI | null
 }

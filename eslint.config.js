@@ -2,7 +2,7 @@ import js from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
-import {defineConfig, globalIgnores} from 'eslint/config'
+import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginQuery from '@tanstack/eslint-plugin-query'
@@ -26,7 +26,7 @@ export default defineConfig([
     },
     rules: {
       ...reactHooks.configs.recommended.rules,
-      'react-refresh/only-export-components': ['warn', {allowConstantExport: true}],
+      'react-refresh/only-export-components': ['warn', { allowConstantExport: true }],
       'import/order': [
         'error',
         {
@@ -53,7 +53,7 @@ export default defineConfig([
           pathGroupsExcludedImportTypes: ['builtin'],
         },
       ],
-      '@typescript-eslint/no-unused-vars': ['error', {argsIgnorePattern: '^_', caughtErrors: 'none'}],
+      '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_', caughtErrors: 'none' }],
       // Allow single-line useCallback when it's simple
       'react-hooks/exhaustive-deps': [
         'warn',

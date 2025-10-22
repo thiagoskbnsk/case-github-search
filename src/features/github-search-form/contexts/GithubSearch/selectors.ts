@@ -1,8 +1,8 @@
-import {DEFAULT_LANGUAGE_FILTER, type SortOptionValues} from '../../constants/filters'
+import { DEFAULT_LANGUAGE_FILTER, type SortOptionValues } from '../../constants/filters'
 
-import type {Filters} from '../../pages/SearchGithub/SearchResults/ResultsList/types'
-import type {Option} from '@shared/components'
-import type {RepositoryUI} from '@shared/services/github/repositories/types'
+import type { Filters } from '../../pages/SearchGithub/SearchResults/ResultsList/types'
+import type { Option } from '@shared/components'
+import type { RepositoryUI } from '@shared/services/github/repositories/types'
 
 /**
  * Selects unique language options from repositories
@@ -41,7 +41,7 @@ const sortRepositories = (repositories: RepositoryUI[], sortedBy: SortOptionValu
 /**
  * Selects repositories based on language and sort filters
  */
-export const handleFilterAndSort = (repositories: RepositoryUI[], {filteredBy, sortedBy}: Filters) => {
+export const handleFilterAndSort = (repositories: RepositoryUI[], { filteredBy, sortedBy }: Filters) => {
   const repositoriesCopy = [...repositories]
 
   const filteredList = filterRepositories(repositoriesCopy, filteredBy)

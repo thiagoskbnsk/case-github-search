@@ -1,6 +1,6 @@
-import {Link, useLocation} from 'react-router'
+import { Link, useLocation } from 'react-router'
 
-import {DEFAULT_TEXTS} from './placeholders'
+import { DEFAULT_TEXTS } from './placeholders'
 
 type NotFoundLocationProps = {
   title?: string
@@ -9,7 +9,8 @@ type NotFoundLocationProps = {
 
 export const NotFound = () => {
   const location = useLocation()
-  const {title = DEFAULT_TEXTS.title, description = DEFAULT_TEXTS.description} = location.state as NotFoundLocationProps
+  const { title = DEFAULT_TEXTS.title, description = DEFAULT_TEXTS.description } =
+    location.state as NotFoundLocationProps
 
   return (
     <div className='text-center'>

@@ -1,19 +1,19 @@
-import {Navigate} from 'react-router'
+import { Navigate } from 'react-router'
 
-import {CounterCard} from './CounterCard'
-import {DetailsGithubHeader} from './DetailsGithubHeader/DetailsGithubHeader'
-import {RepositoryInfoItem} from './RepositoryInfoItem'
-import {useDetailsGithub} from './useDetailsGithub'
+import { CounterCard } from './CounterCard'
+import { DetailsGithubHeader } from './DetailsGithubHeader/DetailsGithubHeader'
+import { RepositoryInfoItem } from './RepositoryInfoItem'
+import { useDetailsGithub } from './useDetailsGithub'
 
 export const DetailsGithub = () => {
-  const {repository, hasRepository, countersMap, repositoryInfoMap} = useDetailsGithub()
+  const { repository, hasRepository, countersMap, repositoryInfoMap } = useDetailsGithub()
 
   if (!hasRepository) {
     return (
       <Navigate
         to='/404'
         replace
-        state={{title: 'Repo Not Found', description: 'The repository you are looking for does not exist.'}}
+        state={{ title: 'Repo Not Found', description: 'The repository you are looking for does not exist.' }}
       />
     )
   }

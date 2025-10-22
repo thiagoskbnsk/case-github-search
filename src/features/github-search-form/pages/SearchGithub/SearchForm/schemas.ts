@@ -8,8 +8,5 @@ export const searchFormSchema = z.object({
     .max(100, 'Maximum length is 100 characters')
     .trim()
     .refine(value => !/^\s*$/.test(value), 'Search cannot be only whitespace')
-    .refine(
-      value => !value.includes('<script>'),
-      'Invalid characters detected'
-    ),
+    .refine(value => !value.includes('<script>'), 'Invalid characters detected'),
 })

@@ -1,14 +1,14 @@
-import {get as getNestedValue} from 'lodash'
+import { get as getNestedValue } from 'lodash'
 
-import {repositoryParamsSchema} from './schemas'
-import {DATA_KEYS} from './constants'
+import { repositoryParamsSchema } from './schemas'
+import { DATA_KEYS } from './constants'
 
-import type {DataKeyItem, MappedData} from './types'
-import type {RepositoryUI} from '@shared/services/github/repositories/types'
-import type {Params} from 'react-router'
+import type { DataKeyItem, MappedData } from './types'
+import type { RepositoryUI } from '@shared/services/github/repositories/types'
+import type { Params } from 'react-router'
 
 export const validateParams = (params: Params<string>) => {
-  const {success, data} = repositoryParamsSchema.safeParse(params)
+  const { success, data } = repositoryParamsSchema.safeParse(params)
 
   return success ? data : null
 }
@@ -18,7 +18,7 @@ export const getValueFromRenderKey = (repository: RepositoryUI, renderKey: strin
 }
 
 export const mapDataKeys = (repository: RepositoryUI, keys: DataKeyItem[]): MappedData[] => {
-  return keys.map(({key, label, renderKey}) => ({
+  return keys.map(({ key, label, renderKey }) => ({
     key,
     label,
     value: getValueFromRenderKey(repository, renderKey),
