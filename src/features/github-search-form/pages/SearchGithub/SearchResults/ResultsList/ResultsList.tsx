@@ -1,13 +1,10 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router'
 
+import { useResultsList } from '@features/github-search-form/contexts/GithubSearch'
+import { useEvents } from '@shared/events/useEvents'
+
 import { Card } from './Card'
-/**
- * TODO: need to back too many folder `../` - fix that and find for more on other components.
- * should create another `@` path?
- */
-import { useEvents } from '../../../../../../shared/events/useEvents'
-import { useResultsList } from '../../../../contexts/GithubSearch'
 
 export const ResultsList = () => {
   const { repositories } = useResultsList()

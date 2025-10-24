@@ -1,8 +1,9 @@
 import { memo } from 'react'
 import { Link } from 'react-router'
 
+import { GithubIcon } from '@features/github-search-form/components'
+
 import { DEFAULT_TEXTS } from './placeholders'
-import { GithubIcon } from '../../../components'
 
 import type { DetailsGithubHeaderProps } from './types'
 

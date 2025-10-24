@@ -1,8 +1,8 @@
+import { SORT_OPTIONS, type SortOptionValues } from '@features/github-search-form/constants/filters'
+import { useSearchFilters } from '@features/github-search-form/contexts/GithubSearch'
 import { Select } from '@shared/components'
 
 import { DEFAULT_TEXTS } from './placeholders'
-import { SORT_OPTIONS, type SortOptionValues } from '../../../../constants/filters'
-import { useSearchFilters } from '../../../../contexts/GithubSearch'
 
 export const Filter = () => {
   const { setSortFilter, setLanguageFilter, languageFilter, sortFilter, languageOptions } = useSearchFilters()

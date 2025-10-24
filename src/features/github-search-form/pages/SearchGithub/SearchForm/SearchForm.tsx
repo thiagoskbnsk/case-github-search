@@ -3,12 +3,12 @@ import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, useWatch } from 'react-hook-form'
 
+import { useSearchInput } from '@features/github-search-form/contexts/GithubSearch'
 import { TextField } from '@shared/components'
 import { Button } from '@shared/components/ui'
 
 import { DEFAULT_TEXTS } from './placeholders'
 import { searchFormSchema } from './schemas'
-import { useSearchInput } from '../../../contexts/GithubSearch'
 
 import type { SearchFormData } from './types'
 
