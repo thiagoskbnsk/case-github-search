@@ -22,10 +22,8 @@ export interface RepositoryUI {
     avatar: string
   }
   forksCount: number
-  watchersCount: number
   openIssuesCount: number
   formattedForksCount: string
-  formattedWatchersCount: string
   formattedOpenIssuesCount: string
   displayLanguage: string
   displayDescription: string

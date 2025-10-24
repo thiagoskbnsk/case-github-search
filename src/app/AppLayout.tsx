@@ -2,7 +2,7 @@ import { Outlet } from 'react-router'
 
 import { ProvidersShell } from './providers'
 
-const AppLayout = () => {
+export const AppLayout = () => {
   return (
     <ProvidersShell>
       <main className='container mx-auto px-4 py-28'>
@@ -11,5 +11,3 @@ const AppLayout = () => {
     </ProvidersShell>
   )
 }
-
-export default AppLayout

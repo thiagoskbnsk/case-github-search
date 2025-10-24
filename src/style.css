@@ -3,6 +3,9 @@
 @source inline("bg-cyan-500/10 ring-cyan-500/10 text-cyan-500 " +
  "bg-purple-400/10 ring-purple-400/10 text-purple-400");
 
+/**
+ * TODO: colors should be moved to tailwind config
+ */
 @theme {
   --color-dark: #1c1c1e;
   --color-dark-smooth: #232227;

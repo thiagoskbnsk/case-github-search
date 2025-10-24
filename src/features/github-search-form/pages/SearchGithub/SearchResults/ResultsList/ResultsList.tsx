@@ -2,18 +2,29 @@ import { useCallback } from 'react'
 import { useNavigate } from 'react-router'
 
 import { Card } from './Card'
-// TODO: too long imports (find for more on other components)
+/**
+ * TODO: need to back too many folder `../` - fix that and find for more on other components.
+ * should create another `@` path?
+ */
+import { useEvents } from '../../../../../../shared/events/useEvents'
 import { useResultsList } from '../../../../contexts/GithubSearch'
 
 export const ResultsList = () => {
   const { repositories } = useResultsList()
   const navigate = useNavigate()
+  const { emit } = useEvents()
 
   const handleClick = useCallback(
     (id: number) => {
+      emit('REPOSITORY_SELECTED', {
+        repositoryId: id,
+        repositoryName: 'EXAMPLE',
+        source: 'search_results',
+      })
+
       navigate(`/repository/${id}`)
     },
-    [navigate]
+    [navigate, emit]
   )
 
   return (

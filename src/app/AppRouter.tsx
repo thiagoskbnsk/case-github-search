@@ -3,11 +3,21 @@ import { BrowserRouter, Routes, Route } from 'react-router'
 
 import { RedirectRoute } from '@shared/components'
 
-const AppLayout = lazy(() => import('./AppLayout'))
+import { AppLayout } from './AppLayout'
+import { EventDebugger } from '../shared/components/ui/EventDebugger/EventDebugger'
+import { usePerformanceListener, useSearchAnalyticsListener } from '../shared/events/eventListeners'
+
 const NotFoundPage = lazy(() => import('./NotFound'))
 const GithubSearchFormRouter = lazy(() => import('@features/github-search-form/Router'))
 
 export const AppRouter = () => {
+  /**
+   *  TODO: should be called here?
+   * if they are all middlewares, why do I need to call them?
+   */
+  useSearchAnalyticsListener()
+  usePerformanceListener()
+
   return (
     <BrowserRouter>
       <Suspense>
@@ -19,6 +29,7 @@ export const AppRouter = () => {
           </Route>
         </Routes>
       </Suspense>
+      <EventDebugger />
     </BrowserRouter>
   )
 }

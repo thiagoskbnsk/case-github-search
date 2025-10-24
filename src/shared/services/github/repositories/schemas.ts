@@ -12,7 +12,6 @@ export const GitHubRepositorySchema = z.object({
     avatar_url: z.string().url(),
   }),
   forks_count: z.number(),
-  watchers_count: z.number(),
   open_issues_count: z.number(),
 })
 
