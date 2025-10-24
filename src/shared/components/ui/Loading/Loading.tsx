@@ -1,9 +1,5 @@
 import { OrbitProgress } from 'react-loading-indicators'
 
-/**
- * TODO:
- * remove hardcode color
- */
 export const Loading = () => {
-  return <OrbitProgress color='#615fff' size='small' />
+  return <OrbitProgress color='var(--color-custom-violet-500)' size='small' />
 }
