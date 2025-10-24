@@ -1,38 +1,49 @@
-import type { MiddlewareContext } from './middlewareComposer'
 import type { EventStore } from '../eventStore'
 import type { EventTypeKeys, EventPayloadMap } from '../types'
+import type { StateCreator } from 'zustand'
 
 export interface LoggingOptions {
   enabled?: boolean
 }
 
+/**
+ * Event logging middleware - adds performance marks and logging metadata
+ * Follows Zustand's standard middleware pattern
+ */
 export const eventLoggingMiddleware = (options: LoggingOptions = {}) => {
   const { enabled = true } = options
 
-  return (context: MiddlewareContext<EventStore>) => {
-    if (!enabled) return
+  // Return a middleware creator function (Zustand pattern)
+  return <T extends EventStore>(config: StateCreator<T, [], [], T>): StateCreator<T, [], [], T> => {
+    // If disabled, return the config unchanged
+    if (!enabled) return config
 
-    const { get, set } = context
-    // TODO: get() returns undefined for the first call
-    const originalEmit = get().emit
+    // Return the wrapper function
+    return (set, get, api) => {
+      // Create the base store from the previous middleware/config
+      const store = config(set, get, api)
 
-    const enhancedEmit = <T extends Parameters<typeof originalEmit>[0]>(
-      type: T,
-      payload: Parameters<typeof originalEmit>[1],
-      metadata: Record<string, unknown> = {}
-    ) => {
-      performance.mark(`event-${type}-start`)
+      // Store the original emit before wrapping
+      const originalEmit = store.emit
 
-      const result = originalEmit(type as EventTypeKeys, payload as EventPayloadMap[EventTypeKeys], {
-        ...metadata,
-        loggedAt: Date.now(),
-      })
+      // Wrap the emit function with logging functionality
+      store.emit = <K extends EventTypeKeys>(
+        type: K,
+        payload: EventPayloadMap[K],
+        metadata: Record<string, unknown> = {}
+      ) => {
+        performance.mark(`event-${type}-start`)
 
-      return result
+        // Call the original emit (from previous middleware in the chain)
+        const result = originalEmit(type, payload, {
+          ...metadata,
+          loggedAt: Date.now(),
+        })
+
+        return result
+      }
+
+      return store
     }
-
-    set({
-      emit: enhancedEmit,
-    })
   }
 }

@@ -1,48 +1,22 @@
 import { subscribeWithSelector } from 'zustand/middleware'
 
-import type { StateCreator, StoreApi } from 'zustand'
+import type { StateCreator } from 'zustand'
 
-export type MiddlewareContext<T> = {
-  get: () => T
-  set: (partial: T | Partial<T> | ((state: T) => T | Partial<T>)) => void
-  api: StoreApi<T>
-}
+// Middleware creator type - follows Zustand's pattern
+export type MiddlewareCreator<T> = (config: StateCreator<T, [], [], T>) => StateCreator<T, [], [], T>
 
-export type MiddlewareFunction<T> = (context: MiddlewareContext<T>) => Promise<void> | void
+/**
+ * Composes middlewares using Zustand's standard function wrapping pattern
+ * Middlewares are applied right-to-left, so the last middleware in the array wraps first
+ * This ensures proper execution order where the first middleware executes first
+ */
+export const middlewareComposer = <T>(baseConfig: StateCreator<T, [], [], T>) => {
+  return (...middlewares: MiddlewareCreator<T>[]) => {
+    // Compose middlewares right-to-left (like Redux/Zustand)
+    // reduceRight ensures: middleware1(middleware2(middleware3(baseConfig)))
+    const composedConfig = middlewares.reduceRight((config, middleware) => middleware(config), baseConfig)
 
-// Sequential middleware composer
-export const middlewareComposer = <T>(stateCreator: StateCreator<T, [], [], T>) => {
-  return (...middlewares: MiddlewareFunction<T>[]) => {
-    // First apply subscribeWithSelector
-    const withSubscribe = subscribeWithSelector(stateCreator)
-
-    // Then apply our middlewares
-    return (
-      set: Parameters<StateCreator<T>>[0],
-      get: Parameters<StateCreator<T>>[1],
-      api: Parameters<StateCreator<T>>[2]
-    ) => {
-      // Create the store first
-      const store = withSubscribe(set, get, api)
-
-      // Create middleware context
-      const context = { get, set, api }
-
-      // Execute middlewares sequentially
-      executeMiddlewaresSequential(middlewares, context)
-
-      return store
-    }
-  }
-}
-
-// Execute middlewares in order (important for emit modifications)
-const executeMiddlewaresSequential = async <T>(middlewares: MiddlewareFunction<T>[], context: MiddlewareContext<T>) => {
-  for (const middleware of middlewares) {
-    try {
-      await middleware(context)
-    } catch (error) {
-      console.error('Middleware execution failed:', error)
-    }
+    // Apply subscribeWithSelector as the outermost wrapper
+    return subscribeWithSelector(composedConfig)
   }
 }

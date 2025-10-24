@@ -1,5 +1,6 @@
 import { create } from 'zustand'
 
+import { registerGlobalListeners } from './eventListeners'
 import { analyticsMiddleware } from './middlewares/analyticsMiddleware'
 import { devToolsMiddleware } from './middlewares/devToolsMiddleware'
 import { eventLoggingMiddleware } from './middlewares/eventLoggingMiddleware'
@@ -99,7 +100,12 @@ export const createEventStore = (baseStore: StateCreator<EventStore, [], [], Eve
     })
   )
 
-  return create(composedStore)
+  const store = create(composedStore)
+
+  // Auto-register global event listeners after store creation
+  registerGlobalListeners(store.getState())
+
+  return store
 }
 
 export const useEventStore = createEventStore(baseStoreImplementation)

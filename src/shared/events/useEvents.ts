@@ -29,8 +29,7 @@ export const useEventListener = <T extends EventTypeKeys>(
   useEffect(() => {
     const callback = callbackFunction as (event: AppEvent) => void
     const unsubscribe = useEventStore.getState().subscribe(eventType, callback)
-    // TODO: should I subscribe devTools here since it should log all events?
-    // is there another way?
+
     return unsubscribe
   }, [eventType, callbackFunction])
 }
