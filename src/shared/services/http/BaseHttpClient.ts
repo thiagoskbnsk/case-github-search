@@ -100,12 +100,14 @@ export abstract class BaseHttpClient {
       throw this.createErrorFromType(ERROR_TYPE.INVALID_CONTENT_TYPE, response)
     }
 
-    const toTry = response.json
-    const onError = () => {
-      throw this.createErrorFromType(ERROR_TYPE.PARSE_ERROR, response)
-    }
+    const toTry = async () => response.json() as Promise<T>
+    const onError = () => this.createErrorFromType(ERROR_TYPE.PARSE_ERROR, response)
 
-    return tryCatchInline(toTry, onError) as Promise<T>
+    const [data, error] = await tryCatchInline(toTry, onError)
+
+    if (error) throw error
+
+    return data
   }
 
   private createApiError(message: string, status: number, statusText: string, response?: Response): ApiError {
