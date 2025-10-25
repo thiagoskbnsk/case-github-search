@@ -1,6 +1,6 @@
 import { HttpClient, type ApiResponse, type RequestConfig } from '@shared/services'
 
-import { GITHUB_API_BASE_URL, GITHUB_API_CONFIG, GITHUB_ENDPOINTS } from './constants'
+import { GITHUB_API_BASE_URL, GITHUB_API_CONFIG, GITHUB_ENDPOINTS } from './GithubService.constants'
 
 /**
  * GitHub API Service

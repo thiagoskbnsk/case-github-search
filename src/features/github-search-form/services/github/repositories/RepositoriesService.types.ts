@@ -1,6 +1,6 @@
 import { z } from 'zod'
 
-import type { GitHubRepositorySchema, GitHubSearchResponseSchema } from './schemas'
+import type { GitHubRepositorySchema, GitHubSearchResponseSchema } from './RepositoriesService.schemas'
 
 export type Repository = z.infer<typeof GitHubRepositorySchema>
 export type SearchResultsResponse = z.infer<typeof GitHubSearchResponseSchema>

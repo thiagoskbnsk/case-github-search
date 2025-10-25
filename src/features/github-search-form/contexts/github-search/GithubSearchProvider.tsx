@@ -6,7 +6,7 @@ import { selectLanguageOptions, handleFilterAndSort, findRepositoryById } from '
 import { GITHUB_SEARCH_CONFIG } from '../../constants/config'
 import { DEFAULT_LANGUAGE_FILTER, SORT_OPTIONS } from '../../constants/filters'
 import { DEFAULT_SEARCH_RESULTS_DATA } from '../../services/github/repositories/RepositoriesService.constants'
-import { fetchSearchResults } from '../../services/github/repositories/service'
+import { fetchSearchResults } from '../../services/github/repositories/RepositoriesService.service'
 
 import type { SortFilter } from './GithubSearchContext.types'
 import type { Option } from '@shared/components'

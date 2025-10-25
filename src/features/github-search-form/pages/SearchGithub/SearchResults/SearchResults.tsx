@@ -1,11 +1,11 @@
 import { use } from 'react'
 
-import { FEEDBACK_MESSAGES } from '@features/github-search-form/constants/placeholders'
 import { useSearchResults } from '@features/github-search-form/contexts/github-search'
 import { PanelNotification } from '@shared/components'
 
 import { Filter } from './Filter'
 import { ResultsList } from './ResultsList'
+import { FEEDBACK_MESSAGES } from './SearchResults.placeholders'
 
 export const SearchResults = () => {
   const { error, noResults, searchPromise } = useSearchResults()

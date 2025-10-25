@@ -1,10 +1,7 @@
 import { memo } from 'react'
 import { clsx } from 'clsx'
 
-type LanguageBadgeProps = {
-  language: string
-  hasLanguage: boolean
-}
+import type { LanguageBadgeProps } from './LanguageBadge.types'
 
 export const LanguageBadge = memo(({ language, hasLanguage }: LanguageBadgeProps) => {
   const languageColor = hasLanguage ? 'cyan' : 'gray'

@@ -1,4 +1,4 @@
-import type { repositoryParamsSchema } from './schemas'
+import type { repositoryParamsSchema } from './DetailsGithub.schemas'
 import type { RepositoryUI } from '../../services/github/repositories/RepositoriesService.types'
 import type { z } from 'zod'
 

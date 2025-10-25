@@ -1,4 +1,4 @@
-import { INFO_LABELS, DEFAULT_TEXTS } from './placeholders'
+import { INFO_LABELS, DEFAULT_TEXTS } from './DetailsGithub.placeholders'
 
 import type { DataKeyItem } from './DetailsGithub.types'
 

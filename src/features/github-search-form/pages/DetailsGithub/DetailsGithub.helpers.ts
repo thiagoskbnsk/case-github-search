@@ -1,7 +1,7 @@
 import { get as getNestedValue } from 'lodash'
 
 import { DATA_KEYS } from './DetailsGithub.constants'
-import { repositoryParamsSchema } from './schemas'
+import { repositoryParamsSchema } from './DetailsGithub.schemas'
 
 import type { DataKeyItem, MappedData } from './DetailsGithub.types'
 import type { RepositoryUI } from '../../services/github/repositories/RepositoriesService.types'

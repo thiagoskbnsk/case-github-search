@@ -1,6 +1,6 @@
 import { githubService } from '../GithubService'
-import { mapSearchResponseToUI } from './mappers'
-import { GitHubSearchResponseSchema } from './schemas'
+import { mapSearchResponseToUI } from './RepositoriesService.mappers'
+import { GitHubSearchResponseSchema } from './RepositoriesService.schemas'
 
 import type { SearchResultsResponse, SearchResultsUI } from './RepositoriesService.types'
 

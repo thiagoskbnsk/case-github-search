@@ -1,8 +1,6 @@
-/**
- * TODO:
- * refactor
- */
-export const GithubIcon = ({ size = 16 }: { size?: number }) => (
+import type { GithubIconProps } from './GithubIcon.types'
+
+export const GithubIcon = ({ size = 16 }: GithubIconProps) => (
   <svg width={size} height={size} role='img' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'>
     <title>GitHub</title>
     <path

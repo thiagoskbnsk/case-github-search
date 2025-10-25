@@ -3,7 +3,7 @@ import { Link } from 'react-router'
 
 import { GithubIcon } from '@features/github-search-form/components'
 
-import { DEFAULT_TEXTS } from './placeholders'
+import { DEFAULT_TEXTS } from './DetailsGithubHeader.placeholders'
 
 import type { DetailsGithubHeaderProps } from './DetailsGithubHeader.types'
 

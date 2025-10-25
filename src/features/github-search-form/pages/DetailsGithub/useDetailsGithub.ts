@@ -1,7 +1,7 @@
 import { useMemo } from 'react'
 import { useParams } from 'react-router'
 
-import { validateParams, getCountersMap, getRepositoryInfoMap } from './selectors'
+import { validateParams, getCountersMap, getRepositoryInfoMap } from './DetailsGithub.helpers'
 import { useRepositoryDetails } from '../../contexts/github-search'
 
 import type { UseDetailsGithubResult } from './DetailsGithub.types'

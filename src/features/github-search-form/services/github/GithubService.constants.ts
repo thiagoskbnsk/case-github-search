@@ -1,7 +1,3 @@
-/**
- * GitHub API Configuration Constants
- */
-
 export const GITHUB_API_BASE_URL = 'https://api.github.com'
 
 export const GITHUB_API_HEADERS = {
@@ -14,9 +10,6 @@ export const GITHUB_API_CONFIG = {
   headers: GITHUB_API_HEADERS,
 } as const
 
-/**
- * GitHub API Endpoints
- */
 export const GITHUB_ENDPOINTS = {
   SEARCH_REPOSITORIES: '/search/repositories',
 } as const
