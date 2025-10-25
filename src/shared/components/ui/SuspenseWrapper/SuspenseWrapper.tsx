@@ -2,7 +2,7 @@ import { Suspense } from 'react'
 
 import { Loading } from '@shared/components'
 
-import type { SuspenseWrapperProps } from './types'
+import type { SuspenseWrapperProps } from './SuspenseWrapper.types'
 
 export const SuspenseWrapper = ({ isFetching, children, loadingFallback = <Loading /> }: SuspenseWrapperProps) => {
   if (!isFetching) return null

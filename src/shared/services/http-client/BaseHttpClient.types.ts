@@ -1,4 +1,4 @@
-import type { ERROR_TYPE } from './constants'
+import type { ERROR_TYPE } from './BaseHttpClient.constants'
 
 export interface RequestConfig extends RequestInit {
   timeout?: number

@@ -1,7 +1,7 @@
 import { forwardRef, useId } from 'react'
 import { clsx } from 'clsx'
 
-import type { TextFieldProps } from './types'
+import type { TextFieldProps } from './TextField.types'
 
 export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
   (

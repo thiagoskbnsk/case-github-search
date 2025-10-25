@@ -1,4 +1,4 @@
-import type { Repository, SearchResultsResponse, RepositoryUI, SearchResultsUI } from './types'
+import type { Repository, SearchResultsResponse, RepositoryUI, SearchResultsUI } from './RepositoriesService.types'
 
 const formatStarsCount = (count: number): string => {
   if (count >= 1000000) {

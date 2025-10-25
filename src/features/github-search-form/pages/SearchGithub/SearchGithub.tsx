@@ -2,8 +2,8 @@ import { lazy } from 'react'
 
 import { SuspenseWrapper } from '@shared/components'
 
-import { DEFAULT_TEXTS } from './placeholders'
 import { SearchForm } from './SearchForm'
+import { DEFAULT_TEXTS } from './SearchGithub.placeholders'
 import { useSearchResults } from '../../contexts/github-search'
 
 const SearchResults = lazy(() => import('./SearchResults'))

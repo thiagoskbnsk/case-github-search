@@ -1,6 +1,6 @@
 import { Navigate, useLocation } from 'react-router'
 
-import type { RedirectRouteProps } from './types'
+import type { RedirectRouteProps } from './RedirectRoute.types'
 
 /**
  * Generic redirect component that can be used for 404s, authentication, or custom redirects

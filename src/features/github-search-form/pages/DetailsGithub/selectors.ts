@@ -1,10 +1,10 @@
 import { get as getNestedValue } from 'lodash'
 
+import { DATA_KEYS } from './DetailsGithub.constants'
 import { repositoryParamsSchema } from './schemas'
-import { DATA_KEYS } from './constants'
 
-import type { DataKeyItem, MappedData } from './types'
-import type { RepositoryUI } from '../../services/github/repositories/types'
+import type { DataKeyItem, MappedData } from './DetailsGithub.types'
+import type { RepositoryUI } from '../../services/github/repositories/RepositoriesService.types'
 import type { Params } from 'react-router'
 
 export const validateParams = (params: Params<string>) => {

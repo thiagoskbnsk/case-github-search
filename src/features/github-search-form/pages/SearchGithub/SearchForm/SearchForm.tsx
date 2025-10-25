@@ -3,8 +3,8 @@ import { MagnifyingGlassIcon } from '@heroicons/react/16/solid'
 import { TextField } from '@shared/components'
 import { Button } from '@shared/components/ui'
 
-import { DEFAULT_TEXTS } from './placeholders'
-import { SEARCH_FIELD_NAME } from './types'
+import { DEFAULT_TEXTS } from './SearchForm.placeholders'
+import { SEARCH_FIELD_NAME } from './SearchForm.types'
 import { useSearchForm } from './useSearchForm'
 
 export const SearchForm = () => {

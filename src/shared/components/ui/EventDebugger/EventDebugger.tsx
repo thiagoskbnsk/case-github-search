@@ -1,4 +1,4 @@
-import { useEventStore } from '@shared/events/eventStore'
+import { useEventStore } from '@/shared/events/events-store/useEventStore'
 
 export const EventDebugger = () => {
   const { events, clearEvents } = useEventStore()

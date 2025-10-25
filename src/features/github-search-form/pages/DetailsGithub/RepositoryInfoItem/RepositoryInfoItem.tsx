@@ -3,7 +3,7 @@ import { clsx } from 'clsx'
 
 import { LanguageBadge } from '../../../components'
 
-import type { RepositoryInfoItemProps } from './types'
+import type { RepositoryInfoItemProps } from './RepositoryInfoItem.types'
 
 export const RepositoryInfoItem = memo(({ info, repository }: RepositoryInfoItemProps) => {
   const getValueContent = useMemo(() => {

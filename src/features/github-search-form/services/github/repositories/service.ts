@@ -2,7 +2,7 @@ import { githubService } from '../GithubService'
 import { mapSearchResponseToUI } from './mappers'
 import { GitHubSearchResponseSchema } from './schemas'
 
-import type { SearchResultsResponse, SearchResultsUI } from './types'
+import type { SearchResultsResponse, SearchResultsUI } from './RepositoriesService.types'
 
 export const fetchSearchResults = async (searchTerm: string): Promise<SearchResultsUI> => {
   const response = await githubService.searchRepositories<SearchResultsResponse>(searchTerm)

@@ -1,6 +1,6 @@
 import { ExclamationCircleIcon, InformationCircleIcon } from '@heroicons/react/16/solid'
 
-import type { IconComponent, PanelNotificationVariant } from './types'
+import type { IconComponent, PanelNotificationVariant } from './PanelNotification.types'
 
 export const VARIANT_STYLES: Record<PanelNotificationVariant, string> = {
   error: 'bg-red-400/10 text-red-400',

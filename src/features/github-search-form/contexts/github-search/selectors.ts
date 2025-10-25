@@ -1,7 +1,7 @@
 import { DEFAULT_LANGUAGE_FILTER, type SortOptionValues } from '../../constants/filters'
 
-import type { Filters } from '../../pages/SearchGithub/SearchResults/ResultsList/types'
-import type { RepositoryUI } from '../../services/github/repositories/types'
+import type { Filters } from '../../pages/SearchGithub/SearchResults/ResultsList/ResultsList.types'
+import type { RepositoryUI } from '../../services/github/repositories/RepositoriesService.types'
 import type { Option } from '@shared/components'
 
 /**

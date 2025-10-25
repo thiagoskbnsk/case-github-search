@@ -5,7 +5,7 @@ import { GithubIcon } from '@features/github-search-form/components'
 
 import { DEFAULT_TEXTS } from './placeholders'
 
-import type { DetailsGithubHeaderProps } from './types'
+import type { DetailsGithubHeaderProps } from './DetailsGithubHeader.types'
 
 export const DetailsGithubHeader = memo(({ repositoryUrl, ownerName, repositoryName }: DetailsGithubHeaderProps) => {
   return (

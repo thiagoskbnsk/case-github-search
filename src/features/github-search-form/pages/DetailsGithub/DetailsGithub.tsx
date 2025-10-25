@@ -1,10 +1,10 @@
 import { RedirectRoute } from '@shared/components'
 
 import { CounterCard } from './CounterCard'
+import { NOT_FOUND_STATE } from './DetailsGithub.constants'
 import { DetailsGithubHeader } from './DetailsGithubHeader/DetailsGithubHeader'
 import { RepositoryInfoItem } from './RepositoryInfoItem'
 import { useDetailsGithub } from './useDetailsGithub'
-import { NOT_FOUND_STATE } from './constants'
 
 export const DetailsGithub = () => {
   const { repository, hasRepository, countersMap, repositoryInfoMap } = useDetailsGithub()

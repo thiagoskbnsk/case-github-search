@@ -1,8 +1,8 @@
 import { Link, useLocation } from 'react-router'
 
-import { DEFAULT_TEXTS } from './placeholders'
+import { DEFAULT_TEXTS } from './NotFound.placeholders'
 
-import type { NotFoundLocationProps } from './types'
+import type { NotFoundLocationProps } from './NotFound.types'
 
 export const NotFound = () => {
   const location = useLocation()

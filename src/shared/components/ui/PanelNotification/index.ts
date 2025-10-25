@@ -1,2 +1,2 @@
 export * from './PanelNotification'
-export * from './types'
+export * from './PanelNotification.types'

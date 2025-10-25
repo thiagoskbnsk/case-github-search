@@ -1,11 +1,11 @@
 import { useCallback, useEffect } from 'react'
 
-import { useEventStore } from './eventStore'
+import { useEventStore } from './events-store'
 
-import type { AppEvent, EventPayloadMap, EventTypeKeys } from './types'
+import type { AppEvent, EventPayloadMap, EventTypeKeys } from './events.types'
 
 export const useEvents = () => {
-  const { emit, subscribe, getEventsByType, clearEvents } = useEventStore()
+  const { emit } = useEventStore()
 
   const emitEvent = useCallback(
     <T extends EventTypeKeys>(type: T, payload: EventPayloadMap[T], metadata?: Record<string, unknown>) => {
@@ -16,9 +16,6 @@ export const useEvents = () => {
 
   return {
     emit: emitEvent,
-    subscribe,
-    getEventsByType,
-    clearEvents,
   }
 }
 

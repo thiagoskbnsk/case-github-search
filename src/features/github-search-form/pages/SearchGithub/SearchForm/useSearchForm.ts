@@ -4,10 +4,10 @@ import { useForm, useWatch } from 'react-hook-form'
 
 import { useSearchInput } from '@/features/github-search-form/contexts/github-search'
 
-import { searchFormSchema } from './schemas'
-import { SEARCH_FIELD_NAME } from './types'
+import { searchFormSchema } from './SearchForm.schemas'
+import { SEARCH_FIELD_NAME } from './SearchForm.types'
 
-import type { SearchFormData } from './types'
+import type { SearchFormData } from './SearchForm.types'
 
 export const useSearchForm = () => {
   const { handleSearch, isLoading, lastSearched } = useSearchInput()

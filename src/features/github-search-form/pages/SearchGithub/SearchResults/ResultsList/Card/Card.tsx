@@ -4,7 +4,7 @@ import { clsx } from 'clsx'
 
 import { GithubIcon, LanguageBadge } from '@features/github-search-form/components'
 
-import type { RepositoryUI } from '../../../../../services/github/repositories/types'
+import type { RepositoryUI } from '../../../../../services/github/repositories/RepositoriesService.types'
 
 type CardProps = {
   repository: RepositoryUI

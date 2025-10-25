@@ -2,7 +2,7 @@ import { Combobox, ComboboxButton, ComboboxInput, ComboboxOption, ComboboxOption
 import { ChevronDownIcon } from '@heroicons/react/20/solid'
 import { clsx } from 'clsx'
 
-import type { SelectProps, Option } from './types'
+import type { SelectProps, Option } from './Select.types'
 
 export const Select = <T extends string = string>({ onChange, value, options, placeholder }: SelectProps<T>) => {
   return (

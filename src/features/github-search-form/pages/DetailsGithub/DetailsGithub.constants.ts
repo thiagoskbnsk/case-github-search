@@ -1,6 +1,6 @@
 import { INFO_LABELS, DEFAULT_TEXTS } from './placeholders'
 
-import type { DataKeyItem } from './types'
+import type { DataKeyItem } from './DetailsGithub.types'
 
 export const DATA_KEYS: Record<string, DataKeyItem> = {
   STARS: {

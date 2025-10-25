@@ -1,2 +1,2 @@
 export * from './TextField'
-export * from './types'
+export * from './TextField.types'

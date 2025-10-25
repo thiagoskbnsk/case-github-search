@@ -1,4 +1,4 @@
-import type { RequestConfig } from './types'
+import type { RequestConfig } from './BaseHttpClient.types'
 
 export const BASE_CONFIG: RequestConfig = {
   timeout: 10000,

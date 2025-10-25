@@ -1,10 +1,10 @@
 import { merge } from 'lodash'
 
-import { delay, tryCatchInline } from '@shared/utils'
+import { tryCatchInline, delay } from '@shared/utils'
 
-import { BASE_CONFIG, ERROR_MESSAGES, ERROR_TYPE, HTTP_STATUS } from './constants'
+import { BASE_CONFIG, ERROR_MESSAGES, ERROR_TYPE, HTTP_STATUS } from './BaseHttpClient.constants'
 
-import type { ApiError, ApiResponse, ErrorType, RequestConfig } from './types'
+import type { ApiError, ApiResponse, ErrorType, RequestConfig } from './BaseHttpClient.types'
 
 export abstract class BaseHttpClient {
   protected baseURL: string

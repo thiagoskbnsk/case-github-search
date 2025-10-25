@@ -34,7 +34,6 @@ export interface RepositorySelectedEvent extends BaseEvent {
 
 export type AppEvent = SearchInitiatedEvent | SearchCompletedEvent | RepositorySelectedEvent
 
-// Type mapping for better inference
 export type EventPayloadMap = {
   SEARCH_INITIATED: SearchInitiatedEvent['payload']
   SEARCH_COMPLETED: SearchCompletedEvent['payload']
@@ -43,12 +42,7 @@ export type EventPayloadMap = {
 
 export type EventTypeKeys = keyof EventPayloadMap
 
-export type EventStore = {
-  events: AppEvent[]
-  listeners: Map<string, Array<(event: AppEvent) => void>>
-
-  emit: <T extends EventTypeKeys>(type: T, payload: EventPayloadMap[T], metadata?: Record<string, unknown>) => void
-  subscribe: (eventType: string, callback: (event: AppEvent) => void) => () => void
-  clearEvents: () => void
-  getEventsByType: (eventType: string) => AppEvent[]
+export type EventListenerConfig<T extends EventTypeKeys = EventTypeKeys> = {
+  type: T
+  handler: (event: Extract<AppEvent, { type: T }>) => void | Promise<void>
 }

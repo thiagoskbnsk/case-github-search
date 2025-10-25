@@ -2,9 +2,9 @@
 import { type ComponentType } from 'react'
 import { EyeIcon, StarIcon, ArrowLeftStartOnRectangleIcon } from '@heroicons/react/16/solid'
 
-import { DATA_KEYS } from '../constants'
+import { DATA_KEYS } from '../DetailsGithub.constants'
 
-import type { IconProps } from './types'
+import type { IconProps } from './CounterCard.types'
 
 export const COUNTER_ICONS_MAP: Record<string, ComponentType<IconProps>> = {
   [DATA_KEYS.STARS.key]: StarIcon,

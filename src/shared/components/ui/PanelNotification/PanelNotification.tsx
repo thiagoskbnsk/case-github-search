@@ -1,9 +1,9 @@
 import React from 'react'
 import { clsx } from 'clsx'
 
-import { ICONS, VARIANT_STYLES } from './constants'
+import { ICONS, VARIANT_STYLES } from './PanelNotification.constants'
 
-import type { PanelNotificationProps } from './types'
+import type { PanelNotificationProps } from './PanelNotification.types'
 
 export const PanelNotification = ({ children, variant }: PanelNotificationProps) => {
   return (

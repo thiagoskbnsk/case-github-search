@@ -4,7 +4,7 @@ import { useParams } from 'react-router'
 import { validateParams, getCountersMap, getRepositoryInfoMap } from './selectors'
 import { useRepositoryDetails } from '../../contexts/github-search'
 
-import type { UseDetailsGithubResult } from './types'
+import type { UseDetailsGithubResult } from './DetailsGithub.types'
 
 export function useDetailsGithub(): UseDetailsGithubResult<true> | UseDetailsGithubResult<false>
 export function useDetailsGithub(): UseDetailsGithubResult {
