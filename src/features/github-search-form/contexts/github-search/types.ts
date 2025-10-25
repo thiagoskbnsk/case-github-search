@@ -1,6 +1,6 @@
 import type { SortOptionValues } from '../../constants/filters'
+import type { RepositoryUI } from '../../services/github/repositories/types'
 import type { Option } from '@shared/components'
-import type { RepositoryUI } from '@shared/services/github/repositories/types'
 
 export type SortFilter = Option<SortOptionValues>
 export type GithubSearchContextType = {

@@ -1,13 +1,12 @@
 import React, { useCallback, useMemo, useState } from 'react'
 import { useQuery } from '@tanstack/react-query'
 
-import { DEFAULT_SEARCH_RESULTS_DATA } from '@shared/services/github/repositories/constants'
-import { fetchSearchResults } from '@shared/services/github/repositories/service'
-
 import { GithubSearchContext } from './context'
 import { selectLanguageOptions, handleFilterAndSort, findRepositoryById } from './selectors'
 import { GITHUB_SEARCH_CONFIG } from '../../constants/config'
 import { DEFAULT_LANGUAGE_FILTER, SORT_OPTIONS } from '../../constants/filters'
+import { DEFAULT_SEARCH_RESULTS_DATA } from '../../services/github/repositories/constants'
+import { fetchSearchResults } from '../../services/github/repositories/service'
 
 import type { SortFilter } from './types'
 import type { Option } from '@shared/components'
