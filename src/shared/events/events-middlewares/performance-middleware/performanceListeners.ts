@@ -1,4 +1,4 @@
-import { createListeners } from '../../events-listeners'
+import { createListeners } from '../../events-utils'
 
 export const PERFORMANCE_EVENT_LISTENERS = createListeners([
   {
