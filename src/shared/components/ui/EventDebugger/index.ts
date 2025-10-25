@@ -1,1 +1,1 @@
-export * from './EventDebugger'
+export * from './component'

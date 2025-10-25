@@ -1,2 +1,2 @@
-export * from './Select'
-export type * from './Select.types'
+export * from './component'
+export type * from './types'

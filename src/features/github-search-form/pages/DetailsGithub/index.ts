@@ -1,1 +1,1 @@
-export { DetailsGithub as default } from './DetailsGithub'
+export { DetailsGithub as default } from './page'

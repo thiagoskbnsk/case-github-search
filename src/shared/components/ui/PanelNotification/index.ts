@@ -1,2 +1,2 @@
-export * from './PanelNotification'
-export * from './PanelNotification.types'
+export * from './component'
+export * from './types'

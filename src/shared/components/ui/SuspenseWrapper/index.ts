@@ -1,1 +1,1 @@
-export * from './SuspenseWrapper'
+export * from './component'

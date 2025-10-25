@@ -1,1 +1,1 @@
-export { LanguageBadge } from './LanguageBadge'
+export { LanguageBadge } from './component'

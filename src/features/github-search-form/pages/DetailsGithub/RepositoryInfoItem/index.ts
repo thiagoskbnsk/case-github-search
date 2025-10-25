@@ -1,1 +1,1 @@
-export { RepositoryInfoItem } from './RepositoryInfoItem'
+export { RepositoryInfoItem } from './component'

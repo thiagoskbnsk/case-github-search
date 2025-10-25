@@ -1,1 +1,1 @@
-export { SearchGithub as default } from './SearchGithub'
+export { SearchGithub as default } from './page'

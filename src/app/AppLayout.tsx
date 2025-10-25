@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
 
-import { ProvidersShell } from './providers'
+import { ProvidersShell } from './ProvidersShell'
 
 export const AppLayout = () => {
   return (

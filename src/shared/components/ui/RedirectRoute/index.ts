@@ -1,1 +1,1 @@
-export * from './RedirectRoute'
+export * from './component'

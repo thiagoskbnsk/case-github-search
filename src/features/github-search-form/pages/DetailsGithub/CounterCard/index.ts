@@ -1,1 +1,1 @@
-export { CounterCard } from './CounterCard'
+export { CounterCard } from './component'

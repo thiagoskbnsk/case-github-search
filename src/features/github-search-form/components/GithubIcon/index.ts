@@ -1,1 +1,1 @@
-export * from './GithubIcon'
+export * from './component'

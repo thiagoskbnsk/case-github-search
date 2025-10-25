@@ -1,6 +1,6 @@
 import { Outlet } from 'react-router'
 
-import { ProvidersShell } from './contexts'
+import { ProvidersShell } from './ProvidersShell'
 
 const Layout = () => {
   return (

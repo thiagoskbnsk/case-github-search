@@ -1,1 +1,1 @@
-export { SearchResults as default } from './SearchResults'
+export { SearchResults as default } from './component'

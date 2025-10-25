@@ -5,7 +5,7 @@ import { EventDebugger } from '@shared/components'
 
 import { AppLayout } from './AppLayout'
 
-const NotFoundPage = lazy(() => import('./NotFound'))
+const NotFoundPage = lazy(() => import('./pages/NotFound'))
 const GithubSearchFormRouter = lazy(() => import('@features/github-search-form/Router'))
 
 export const AppRouter = () => {
