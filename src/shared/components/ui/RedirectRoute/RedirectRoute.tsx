@@ -3,10 +3,17 @@ import { Navigate, useLocation } from 'react-router'
 import type { RedirectRouteProps } from './types'
 
 /**
- * TODO: make it more generic, can be used on DetailsPage
+ * Generic redirect component that can be used for 404s, authentication, or custom redirects
+ * Automatically includes the original path in state for breadcrumb tracking
  */
-export const RedirectRoute = ({ to, statusCode, replace = true }: RedirectRouteProps) => {
+export const RedirectRoute = ({ to, statusCode, replace = true, state = {} }: RedirectRouteProps) => {
   const location = useLocation()
 
-  return <Navigate to={to} replace={replace} state={{ statusCode, originalPath: location.pathname }} />
+  const navigationState = {
+    ...state,
+    ...(statusCode && { statusCode }),
+    originalPath: location.pathname,
+  }
+
+  return <Navigate to={to} replace={replace} state={navigationState} />
 }

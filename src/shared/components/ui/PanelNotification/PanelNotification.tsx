@@ -1,23 +1,9 @@
 import React from 'react'
-import { ExclamationCircleIcon, InformationCircleIcon } from '@heroicons/react/16/solid'
 import { clsx } from 'clsx'
 
-/**
- * TODO: refactor
- */
-type PanelNotificationProps = React.PropsWithChildren<{
-  variant: 'error' | 'warning'
-}>
+import { ICONS, VARIANT_STYLES } from './constants'
 
-const VARIANT_STYLES = {
-  error: 'bg-red-400/10 text-red-400',
-  warning: 'bg-amber-400/10 text-amber-400',
-}
-
-const ICONS = {
-  error: ExclamationCircleIcon,
-  warning: InformationCircleIcon,
-}
+import type { PanelNotificationProps } from './types'
 
 export const PanelNotification = ({ children, variant }: PanelNotificationProps) => {
   return (
