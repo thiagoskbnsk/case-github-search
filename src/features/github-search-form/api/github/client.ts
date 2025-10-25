@@ -1,6 +1,7 @@
 import { HttpClient, type ApiResponse, type RequestConfig } from '@shared/services'
 
-import { GITHUB_API_BASE_URL, GITHUB_API_CONFIG, GITHUB_ENDPOINTS } from './config'
+import { GITHUB_API } from './config'
+import { GITHUB_ENDPOINTS } from './endpoints'
 
 /**
  * GitHub API Service
@@ -8,7 +9,10 @@ import { GITHUB_API_BASE_URL, GITHUB_API_CONFIG, GITHUB_ENDPOINTS } from './conf
  */
 export class GithubService extends HttpClient {
   constructor() {
-    super(GITHUB_API_BASE_URL, GITHUB_API_CONFIG)
+    super(GITHUB_API.baseUrl, {
+      retries: GITHUB_API.retries,
+      headers: GITHUB_API.headers,
+    })
   }
 
   /**

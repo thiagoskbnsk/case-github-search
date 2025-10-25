@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query'
 
 import { GithubSearchContext } from './context'
 import { selectLanguageOptions, handleFilterAndSort, findRepositoryById } from './selectors'
-import { DEFAULT_SEARCH_RESULTS_DATA, fetchSearchResults, GITHUB_SEARCH_CONFIG } from '../../api/github'
+import { DEFAULT_SEARCH_RESULTS_DATA, fetchSearchResults, GITHUB_CACHE } from '../../api/github'
 import { DEFAULT_LANGUAGE_FILTER, SORT_OPTIONS } from '../../pages/SearchGithub/SearchResults/Filter/filters'
 
 import type { SortFilter } from './types'
@@ -22,7 +22,7 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
   } = useQuery({
     queryKey: ['github-search', lastSearched],
     queryFn: () => fetchSearchResults(lastSearched),
-    staleTime: GITHUB_SEARCH_CONFIG.cache.ttl,
+    staleTime: GITHUB_CACHE.ttl,
     enabled: Boolean(lastSearched),
     experimental_prefetchInRender: true,
   })

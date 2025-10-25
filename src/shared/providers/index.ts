@@ -1,1 +1,1 @@
-export * from './ReactQuery'
+export * from './ReactQueryProvider'
