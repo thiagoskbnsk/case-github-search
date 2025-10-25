@@ -28,7 +28,6 @@ export const mapRepositoryToUI = (repo: Repository): RepositoryUI => ({
   hasDescription: Boolean(repo.description),
   hasLanguage: Boolean(repo.language),
   forksCount: repo.forks_count,
-  // TODO: Should format just for the first list, as soon as user opens details, format the rest?
   openIssuesCount: repo.open_issues_count,
   formattedForksCount: formatStarsCount(repo.forks_count),
   formattedOpenIssuesCount: formatStarsCount(repo.open_issues_count),
