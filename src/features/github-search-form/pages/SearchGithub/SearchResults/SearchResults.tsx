@@ -1,7 +1,7 @@
 import { use } from 'react'
 
 import { FEEDBACK_MESSAGES } from '@features/github-search-form/constants/placeholders'
-import { useSearchResults } from '@features/github-search-form/contexts/GithubSearch'
+import { useSearchResults } from '@features/github-search-form/contexts/github-search'
 import { PanelNotification } from '@shared/components'
 
 import { Filter } from './Filter'

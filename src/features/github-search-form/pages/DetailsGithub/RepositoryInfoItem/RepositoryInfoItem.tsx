@@ -1,22 +1,14 @@
 import { memo, useMemo } from 'react'
 import { clsx } from 'clsx'
 
+import { LanguageBadge } from '../../../components'
+
 import type { RepositoryInfoItemProps } from './types'
 
 export const RepositoryInfoItem = memo(({ info, repository }: RepositoryInfoItemProps) => {
-  const languageColor = repository?.hasLanguage ? 'cyan' : 'gray'
-
   const getValueContent = useMemo(() => {
     if (info.label === 'Language') {
-      return (
-        <span
-          className={clsx(
-            'rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap ring-1 ring-inset',
-            `bg-${languageColor}-500/10 ring-${languageColor}-500/10 text-${languageColor}-500`
-          )}>
-          {info.value}
-        </span>
-      )
+      return <LanguageBadge language={info.value} hasLanguage={repository.hasLanguage} />
     }
 
     if (info.label === 'Description') {
@@ -28,7 +20,7 @@ export const RepositoryInfoItem = memo(({ info, repository }: RepositoryInfoItem
     }
 
     return <span className='break-words'>{info.value}</span>
-  }, [info.value, info.label, languageColor, repository.hasDescription])
+  }, [info.value, info.label, repository.hasDescription, repository.hasLanguage])
 
   return (
     <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>

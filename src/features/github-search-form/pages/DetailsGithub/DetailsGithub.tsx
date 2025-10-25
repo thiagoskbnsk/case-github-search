@@ -1,21 +1,16 @@
-import { Navigate } from 'react-router'
+import { RedirectRoute } from '@shared/components'
 
 import { CounterCard } from './CounterCard'
 import { DetailsGithubHeader } from './DetailsGithubHeader/DetailsGithubHeader'
 import { RepositoryInfoItem } from './RepositoryInfoItem'
 import { useDetailsGithub } from './useDetailsGithub'
+import { NOT_FOUND_STATE } from './constants'
 
 export const DetailsGithub = () => {
   const { repository, hasRepository, countersMap, repositoryInfoMap } = useDetailsGithub()
 
   if (!hasRepository) {
-    return (
-      <Navigate
-        to='/404'
-        replace
-        state={{ title: 'Repo Not Found', description: 'The repository you are looking for does not exist.' }}
-      />
-    )
+    return <RedirectRoute to='/404' state={NOT_FOUND_STATE} />
   }
 
   return (

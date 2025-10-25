@@ -4,7 +4,7 @@ import { repositoryParamsSchema } from './schemas'
 import { DATA_KEYS } from './constants'
 
 import type { DataKeyItem, MappedData } from './types'
-import type { RepositoryUI } from '@shared/services/github/repositories/types'
+import type { RepositoryUI } from '../../services/github/repositories/types'
 import type { Params } from 'react-router'
 
 export const validateParams = (params: Params<string>) => {

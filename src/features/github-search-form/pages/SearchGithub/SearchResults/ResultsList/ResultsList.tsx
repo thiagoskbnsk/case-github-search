@@ -1,7 +1,7 @@
 import { useCallback } from 'react'
 import { useNavigate } from 'react-router'
 
-import { useResultsList } from '@features/github-search-form/contexts/GithubSearch'
+import { useResultsList } from '@features/github-search-form/contexts/github-search'
 import { useEvents } from '@shared/events/useEvents'
 
 import { Card } from './Card'

@@ -1,4 +1,4 @@
-import { INFO_LABELS } from './placeholders'
+import { INFO_LABELS, DEFAULT_TEXTS } from './placeholders'
 
 import type { DataKeyItem } from './types'
 
@@ -39,3 +39,8 @@ export const DATA_KEYS: Record<string, DataKeyItem> = {
     renderKey: 'displayLanguage',
   },
 }
+
+export const NOT_FOUND_STATE = {
+  title: DEFAULT_TEXTS.notFoundRepository.title,
+  description: DEFAULT_TEXTS.notFoundRepository.description,
+} as const

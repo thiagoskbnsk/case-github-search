@@ -2,9 +2,9 @@ import { memo } from 'react'
 import { StarIcon } from '@heroicons/react/16/solid'
 import { clsx } from 'clsx'
 
-import { GithubIcon } from '@features/github-search-form/components'
+import { GithubIcon, LanguageBadge } from '@features/github-search-form/components'
 
-import type { RepositoryUI } from '@shared/services/github/repositories/types'
+import type { RepositoryUI } from '../../../../../services/github/repositories/types'
 
 type CardProps = {
   repository: RepositoryUI
@@ -16,9 +16,6 @@ export const Card = memo(
     repository: { name, owner, formattedStars, displayDescription, displayLanguage, hasDescription, hasLanguage, url },
     onClick,
   }: CardProps) => {
-    // TODO: this code repeats in other component
-    const languageColor = hasLanguage ? 'cyan' : 'gray'
-
     return (
       <div
         onClick={onClick}
@@ -41,13 +38,7 @@ export const Card = memo(
             <span className='truncate text-left text-sm font-medium text-white'>{name}</span>
           </p>
           <div className='flex max-w-6/12 items-start gap-x-2'>
-            <span
-              className={clsx(
-                'block rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap ring-1 ring-inset',
-                `bg-${languageColor}-500/10 ring-${languageColor}-500/10 text-${languageColor}-500`
-              )}>
-              {displayLanguage}
-            </span>
+            <LanguageBadge language={displayLanguage} hasLanguage={hasLanguage} />
             <span
               className='flex gap-1 rounded-md bg-purple-400/10 px-2 py-1 text-xs font-medium text-purple-400 ring-1
                 ring-purple-400/10 ring-inset'>

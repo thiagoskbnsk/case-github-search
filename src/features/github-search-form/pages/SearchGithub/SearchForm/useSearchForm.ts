@@ -2,7 +2,7 @@ import { useCallback, useMemo } from 'react'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { useForm, useWatch } from 'react-hook-form'
 
-import { useSearchInput } from '@features/github-search-form/contexts/GithubSearch'
+import { useSearchInput } from '@/features/github-search-form/contexts/github-search'
 
 import { searchFormSchema } from './schemas'
 import { SEARCH_FIELD_NAME } from './types'

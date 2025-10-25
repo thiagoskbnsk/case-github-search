@@ -1,0 +1,1 @@
+export { LanguageBadge } from './LanguageBadge'

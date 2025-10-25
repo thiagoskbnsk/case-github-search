@@ -1,5 +1,5 @@
 import { SORT_OPTIONS, type SortOptionValues } from '@features/github-search-form/constants/filters'
-import { useSearchFilters } from '@features/github-search-form/contexts/GithubSearch'
+import { useSearchFilters } from '@features/github-search-form/contexts/github-search'
 import { Select } from '@shared/components'
 
 import { DEFAULT_TEXTS } from './placeholders'
