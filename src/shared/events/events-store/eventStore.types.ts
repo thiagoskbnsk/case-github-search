@@ -9,4 +9,5 @@ export interface EventStore {
 
   emit: <T extends EventTypeKeys>(type: T, payload: EventPayloadMap[T], metadata?: Record<string, unknown>) => void
   subscribe: (eventType: string, callback: (event: AppEvent) => void) => () => void
+  clearEvents: () => void
 }

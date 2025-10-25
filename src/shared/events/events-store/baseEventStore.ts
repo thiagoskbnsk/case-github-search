@@ -49,4 +49,6 @@ export const baseStoreImplementation: StateCreator<EventStore, [], [], EventStor
       })
     }
   },
+
+  clearEvents: () => set({ events: [] }),
 })
