@@ -4,17 +4,34 @@ import { InfiniteScrollTrigger } from '../InfiniteScrollTrigger'
 import { useResultsListLogic } from './hooks'
 
 export const ResultsList = () => {
-  const { repositories, hasNextPage, showEndMessage, handleClick } = useResultsListLogic()
+  const { repositories, hasNextPage, showEndMessage, handleClick, parentRef, virtualizer } = useResultsListLogic()
+
+  const virtualItems = virtualizer.getVirtualItems()
 
   return (
-    <div>
-      <ul className='cc-grid-template gap-4'>
-        {repositories.map(repository => (
-          <li key={repository.id}>
-            <Card repository={repository} onClick={() => handleClick(repository.id)} />
-          </li>
-        ))}
-      </ul>
+    <div ref={parentRef} className='w-full'>
+      <div
+        className='relative mb-4 w-full'
+        style={{
+          height: `${virtualizer.getTotalSize()}px`,
+        }}>
+        {virtualItems.map(virtualItem => {
+          const repository = repositories[virtualItem.index]
+
+          return (
+            <div
+              key={repository.id}
+              data-index={virtualItem.index}
+              ref={virtualizer.measureElement}
+              className='absolute top-0 left-0 w-full pb-2'
+              style={{
+                transform: `translateY(${virtualItem.start}px)`,
+              }}>
+              <Card repository={repository} onClick={() => handleClick(repository.id)} />
+            </div>
+          )
+        })}
+      </div>
 
       {hasNextPage && <InfiniteScrollTrigger />}
       {showEndMessage && <EndOfResults />}

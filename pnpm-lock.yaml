@@ -20,6 +20,9 @@ importers:
       '@tanstack/react-query':
         specifier: ^5.90.2
         version: 5.90.2(react@19.2.0)
+      '@tanstack/react-virtual':
+        specifier: ^3.13.12
+        version: 3.13.12(react-dom@19.2.0(react@19.2.0))(react@19.2.0)
       lodash:
         specifier: ^4.17.21
         version: 4.17.21
