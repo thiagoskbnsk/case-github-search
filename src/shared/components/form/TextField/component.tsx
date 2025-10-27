@@ -42,13 +42,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
                 'outline-1 -outline-offset-1 outline-white/50',
                 'focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--color-theme-primary-500)]',
                 'disabled:cursor-not-allowed disabled:opacity-60',
-                'placeholder:text-gray-500 aria-invalid:outline-red-500',
+                'placeholder:text-white/60 aria-invalid:outline-red-500',
                 leftIcon && 'pl-10'
               )}
             />
             {leftIcon && (
               <div
-                className={'pointer-events-none col-start-1 row-start-1 ml-3 size-4 self-center text-gray-500'}
+                className={'pointer-events-none col-start-1 row-start-1 ml-3 size-4 self-center text-white/60'}
                 aria-hidden='true'>
                 {leftIcon}
               </div>

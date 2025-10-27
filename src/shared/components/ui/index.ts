@@ -1,4 +1,5 @@
 export * from './Button'
+export * from './ErrorBoundary'
 export * from './EventDebugger'
 export * from './Loading'
 export * from './PanelNotification'
