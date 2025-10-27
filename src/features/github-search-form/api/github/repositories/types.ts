@@ -7,7 +7,7 @@ export type SearchResultsResponse = z.infer<typeof GitHubSearchResponseSchema>
 
 export interface SearchResultsUI {
   repositories: RepositoryUI[]
-  totalCount: number
+  incompleteResults: boolean
 }
 
 export interface RepositoryUI {

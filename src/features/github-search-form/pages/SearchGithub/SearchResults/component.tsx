@@ -1,5 +1,3 @@
-import { use } from 'react'
-
 import { useSearchResults } from '@features/github-search-form/providers'
 import { PanelNotification } from '@shared/components'
 
@@ -8,9 +6,7 @@ import { FEEDBACK_MESSAGES } from './placeholders'
 import { ResultsList } from './ResultsList'
 
 export const SearchResults = () => {
-  const { error, noResults, searchPromise } = useSearchResults()
-
-  use(searchPromise)
+  const { error, noResults } = useSearchResults()
 
   if (error) {
     return <PanelNotification variant='error'>{FEEDBACK_MESSAGES.error}</PanelNotification>

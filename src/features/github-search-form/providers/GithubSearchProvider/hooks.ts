@@ -14,12 +14,16 @@ export const useGithubSearch = <T>(selector: Selector<T>) =>
   })
 
 export const useSearchResults = () =>
-  useGithubSearch(state => ({
-    error: state.error,
-    noResults: state.noResults,
-    searchPromise: state.searchPromise,
-    shouldShowResults: Boolean(state.lastSearched),
-  }))
+  useGithubSearch(state => {
+    const hasSearched = Boolean(state.lastSearched)
+    const noResults = hasSearched && state.repositories.length === 0 && !state.error && !state.isLoading
+
+    return {
+      error: state.error,
+      noResults,
+      shouldShowResults: hasSearched,
+    }
+  })
 
 export const useSearchInput = () =>
   useGithubSearch(state => ({
@@ -48,3 +52,16 @@ export const useRepositoryDetails = () =>
   useGithubSearch(state => ({
     getRepositoryById: state.getRepositoryById,
   }))
+
+export const useGithubSearchPagination = () =>
+  useGithubSearch(state => {
+    const showEndMessage = !state.hasNextPage && state.currentPage >= state.maxPages
+
+    return {
+      fetchNextPage: state.fetchNextPage,
+      hasNextPage: state.hasNextPage,
+      isFetchingNextPage: state.isFetchingNextPage,
+      currentPage: state.currentPage,
+      showEndMessage,
+    }
+  })

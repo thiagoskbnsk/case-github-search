@@ -23,7 +23,7 @@ export const SearchGithub = () => {
       <div className='cc-grid-template gap-3'>
         <SearchForm />
 
-        <SuspenseWrapper isFetching={shouldShowResults}>
+        <SuspenseWrapper isFetching={shouldShowResults} loadingFallback={null}>
           <SearchResults />
         </SuspenseWrapper>
       </div>

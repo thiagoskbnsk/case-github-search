@@ -1,11 +1,27 @@
-import { DEFAULT_LANGUAGE_FILTER, type SortOptionValues } from '../../pages/SearchGithub/SearchResults/Filter/filters'
+﻿import { DEFAULT_LANGUAGE_FILTER, type SortOptionValues } from '../../pages/SearchGithub/SearchResults/Filter/filters'
+import { MAX_PAGES } from './constants'
 
-import type { RepositoryUI } from '../../api/github/repositories'
+import type { SearchResultsUI, RepositoryUI } from '../../api/github/repositories'
 import type { Filters } from '../../pages/SearchGithub/SearchResults/ResultsList/types'
 import type { Option } from '@shared/components'
 
 /**
- * Selects unique language options from repositories
+ * Determines the next page parameter for infinite query pagination
+ * Returns undefined when max pages reached
+ */
+export const getNextPageParam = (lastPage: SearchResultsUI, allPages: SearchResultsUI[]): number | undefined => {
+  const currentPage = allPages.length
+
+  // Stop if we've reached:
+  if (currentPage >= MAX_PAGES) return undefined
+  if (lastPage.repositories.length === 0) return undefined
+
+  // Continue to next page
+  return currentPage + 1
+}
+
+/**
+ * Extracts unique language options from repositories
  */
 export const selectLanguageOptions = (repositories: RepositoryUI[]): Option[] => {
   const uniqueLanguages = repositories
@@ -23,12 +39,18 @@ export const selectLanguageOptions = (repositories: RepositoryUI[]): Option[] =>
   return [DEFAULT_LANGUAGE_FILTER, ...languagesList]
 }
 
+/**
+ * Filters repositories by language
+ */
 const filterRepositories = (repositories: RepositoryUI[], filteredBy: string) => {
   if (!filteredBy) return repositories
 
   return repositories.filter(repository => repository.language?.toLowerCase() === filteredBy)
 }
 
+/**
+ * Sorts repositories by criteria
+ */
 const sortRepositories = (repositories: RepositoryUI[], sortedBy: SortOptionValues) => {
   switch (sortedBy) {
     case 'stargazed':
@@ -39,7 +61,7 @@ const sortRepositories = (repositories: RepositoryUI[], sortedBy: SortOptionValu
 }
 
 /**
- * Selects repositories based on language and sort filters
+ * Applies language filter and sort to repositories
  */
 export const handleFilterAndSort = (repositories: RepositoryUI[], { filteredBy, sortedBy }: Filters) => {
   const repositoriesCopy = [...repositories]
@@ -58,3 +80,5 @@ export const findRepositoryById = (repositories: RepositoryUI[], repositoryId: n
 
   return repository || null
 }
+
+export { MAX_PAGES }

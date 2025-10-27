@@ -35,5 +35,5 @@ export const mapRepositoryToUI = (repo: Repository): RepositoryUI => ({
 
 export const mapSearchResponseToUI = (response: SearchResultsResponse): SearchResultsUI => ({
   repositories: response.items.map(mapRepositoryToUI),
-  totalCount: response.total_count,
+  incompleteResults: response.incomplete_results,
 })

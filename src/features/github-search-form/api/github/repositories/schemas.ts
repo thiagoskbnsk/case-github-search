@@ -17,5 +17,6 @@ export const GitHubRepositorySchema = z.object({
 
 export const GitHubSearchResponseSchema = z.object({
   total_count: z.number().optional().default(0),
+  incomplete_results: z.boolean().optional().default(false),
   items: z.array(GitHubRepositorySchema),
 })

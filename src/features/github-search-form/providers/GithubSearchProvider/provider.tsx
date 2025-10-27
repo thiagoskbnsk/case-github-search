@@ -1,10 +1,11 @@
-import React, { useCallback, useMemo, useState } from 'react'
-import { useQuery } from '@tanstack/react-query'
+import { useCallback, useMemo, useState } from 'react'
+import { useInfiniteQuery } from '@tanstack/react-query'
 
 import { GithubSearchContext } from './context'
-import { selectLanguageOptions, handleFilterAndSort, findRepositoryById } from './selectors'
-import { DEFAULT_SEARCH_RESULTS_DATA, fetchSearchResults, GITHUB_CACHE } from '../../api/github'
+import { getNextPageParam, selectLanguageOptions, handleFilterAndSort, findRepositoryById } from './helpers'
+import { fetchSearchResults, GITHUB_CACHE } from '../../api/github'
 import { DEFAULT_LANGUAGE_FILTER, SORT_OPTIONS } from '../../pages/SearchGithub/SearchResults/Filter/filters'
+import { MAX_PAGES, DEFAULT_SEARCH_RESULTS_DATA } from './constants'
 
 import type { SortFilter } from './types'
 import type { Option } from '@shared/components'
@@ -18,30 +19,35 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
     data = DEFAULT_SEARCH_RESULTS_DATA,
     isLoading,
     error,
-    promise: searchPromise,
-  } = useQuery({
+    fetchNextPage,
+    hasNextPage,
+    isFetchingNextPage,
+  } = useInfiniteQuery({
     queryKey: ['github-search', lastSearched],
-    queryFn: () => fetchSearchResults(lastSearched),
+    queryFn: ({ pageParam }) => fetchSearchResults(lastSearched, pageParam),
+    initialPageParam: 1,
+    getNextPageParam,
+    maxPages: MAX_PAGES,
     staleTime: GITHUB_CACHE.ttl,
+    gcTime: GITHUB_CACHE.ttl * 2,
+    refetchOnMount: false,
+    refetchOnWindowFocus: false,
     enabled: Boolean(lastSearched),
-    experimental_prefetchInRender: true,
   })
 
-  const { repositories, totalCount } = data
+  const { pages } = data
 
-  const noResults = useMemo(
-    () => Boolean(lastSearched) && totalCount === 0 && !error && !isLoading,
-    [lastSearched, totalCount, error, isLoading]
-  )
-
-  const languageOptions = useMemo(() => selectLanguageOptions(repositories), [repositories])
+  // Flatten all pages into a single array of repositories
+  const allRepositories = useMemo(() => pages.flatMap(page => page.repositories), [pages])
+  const currentPage = useMemo(() => pages.length, [pages])
+  const languageOptions = useMemo(() => selectLanguageOptions(allRepositories), [allRepositories])
 
   const filteredRepositories = useMemo(() => {
-    return handleFilterAndSort(repositories, {
+    return handleFilterAndSort(allRepositories, {
       filteredBy: languageFilter.value,
       sortedBy: sortFilter.value,
     })
-  }, [repositories, languageFilter, sortFilter])
+  }, [allRepositories, languageFilter, sortFilter])
 
   const clearFilters = useCallback(() => {
     setSortFilter(SORT_OPTIONS[0])
@@ -50,9 +56,9 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
 
   const handleSearch = useCallback(
     (inputSearchValue: string) => {
-      const shouldDoANewSearch = inputSearchValue && inputSearchValue !== lastSearched
+      const isDifferentSearch = inputSearchValue !== lastSearched
 
-      if (shouldDoANewSearch) {
+      if (isDifferentSearch) {
         clearFilters()
         setLastSearched(inputSearchValue)
       }
@@ -70,33 +76,36 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       sortFilter,
       languageFilter,
       repositories: filteredRepositories,
-      totalCount,
       isLoading,
       error,
-      noResults,
       languageOptions,
       setSortFilter,
       setLanguageFilter,
       handleSearch,
-      searchPromise,
       lastSearched,
       getRepositoryById,
+      fetchNextPage,
+      hasNextPage,
+      isFetchingNextPage,
+      currentPage,
+      maxPages: MAX_PAGES,
     }),
     [
       sortFilter,
       languageFilter,
       filteredRepositories,
-      totalCount,
       isLoading,
       error,
-      noResults,
       languageOptions,
       setSortFilter,
       setLanguageFilter,
       handleSearch,
-      searchPromise,
       lastSearched,
       getRepositoryById,
+      fetchNextPage,
+      hasNextPage,
+      isFetchingNextPage,
+      currentPage,
     ]
   )
 

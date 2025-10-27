@@ -11,7 +11,7 @@ export const Select = <T extends string = string>({ onChange, value, options, pl
         <ComboboxInput<Option>
           className={clsx(
             'block w-full rounded-md bg-white/2 py-1.5 pr-12 pl-3 text-sm/6 text-white caret-transparent',
-            'outline-1 -outline-offset-1 outline-white/50',
+            'outline-1 -outline-offset-1 outline-white/30',
             'focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--color-theme-primary-500)]',
             'placeholder:text-gray-500'
           )}

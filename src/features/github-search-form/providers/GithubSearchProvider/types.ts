@@ -8,17 +8,19 @@ export type GithubSearchState = {
   sortFilter: SortFilter
   languageFilter: Option
   repositories: RepositoryUI[]
-  totalCount: number
   isLoading: boolean
   error: Error | null
-  noResults: boolean
   languageOptions: Option[]
   setSortFilter: (sort: SortFilter) => void
   setLanguageFilter: (language: Option) => void
   handleSearch: (inputSearch: string) => void
-  searchPromise: Promise<{ repositories: RepositoryUI[]; totalCount: number }>
   lastSearched: string
   getRepositoryById: (repositoryId: number) => RepositoryUI | null
+  fetchNextPage: () => void
+  hasNextPage: boolean
+  isFetchingNextPage: boolean
+  currentPage: number
+  maxPages: number
 }
 
 export type Selector<T> = (state: GithubSearchState) => T

@@ -13,31 +13,36 @@ export const useSearchForm = () => {
   const { handleSearch, isLoading, lastSearched } = useSearchInput()
 
   const {
-    register,
-    handleSubmit,
     control,
+    handleSubmit,
+    reset,
     formState: { isSubmitting, errors },
   } = useForm<SearchFormData>({
     mode: 'onSubmit',
     resolver: zodResolver(searchFormSchema),
     defaultValues: { [SEARCH_FIELD_NAME]: lastSearched },
   })
-
-  const searchValue = useWatch({ name: SEARCH_FIELD_NAME, control })
+  const searchValue = useWatch({ control, name: SEARCH_FIELD_NAME })
 
   const onSubmit = useCallback((data: SearchFormData) => handleSearch(data[SEARCH_FIELD_NAME]), [handleSearch])
 
+  const handleClear = useCallback(() => {
+    reset()
+    handleSearch('')
+  }, [reset, handleSearch])
+
   const isSubmitDisabled = useMemo(
-    () => isLoading || isSubmitting || !searchValue || !!errors[SEARCH_FIELD_NAME],
-    [isLoading, isSubmitting, searchValue, errors]
+    () => isSubmitting || isLoading || !!errors[SEARCH_FIELD_NAME] || !searchValue,
+    [isSubmitting, isLoading, errors, searchValue]
   )
 
-  const isFieldDisabled = useMemo(() => isLoading || isSubmitting, [isLoading, isSubmitting])
+  const isFieldDisabled = useMemo(() => isSubmitting || isLoading, [isSubmitting, isLoading])
 
   return {
-    register,
+    control,
     handleSubmit,
     onSubmit,
+    handleClear,
     isSubmitDisabled,
     isFieldDisabled,
     isLoading,
