@@ -25,7 +25,7 @@ export const RepositoryInfoItem = memo(({ info, repository }: RepositoryInfoItem
   return (
     <div className='px-4 py-6 sm:grid sm:grid-cols-3 sm:gap-4 sm:px-0'>
       <span className='text-sm/6 font-medium text-gray-100'>{info.label}</span>
-      <div className='mt-1 overflow-hidden text-sm/6 text-gray-400 sm:col-span-2 sm:mt-0'>{getValueContent}</div>
+      <div className='mt-1 overflow-hidden pb-1 text-sm/6 text-gray-400 sm:col-span-2 sm:mt-0'>{getValueContent}</div>
     </div>
   )
 })

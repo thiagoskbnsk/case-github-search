@@ -11,8 +11,8 @@ export const Select = <T extends string = string>({ onChange, value, options, pl
         <ComboboxInput<Option>
           className={clsx(
             'block w-full rounded-md bg-white/2 py-1.5 pr-12 pl-3 text-sm/6 text-white caret-transparent',
-            'outline-1 -outline-offset-1 outline-gray-600',
-            'focus:outline-2 focus:-outline-offset-2 focus:outline-purple-500',
+            'outline-1 -outline-offset-1 outline-white/50',
+            'focus:outline-2 focus:-outline-offset-2 focus:outline-[var(--color-theme-primary-500)]',
             'placeholder:text-gray-500'
           )}
           displayValue={option => option?.label || ''}
@@ -31,7 +31,7 @@ export const Select = <T extends string = string>({ onChange, value, options, pl
           transition
           className={clsx(
             'absolute z-10 mt-1 max-h-60 w-full overflow-auto rounded-md',
-            'border-white/10 bg-[#1c1029] py-1 text-sm',
+            'border-white/10 bg-[var(--color-theme-primary-900)] py-1 text-sm',
             'outline -outline-offset-1 outline-white/10',
             'data-leave:transition data-leave:duration-100 data-leave:ease-in data-closed:data-leave:opacity-0',
             'cc-scrollbar'
@@ -42,7 +42,7 @@ export const Select = <T extends string = string>({ onChange, value, options, pl
               value={option}
               className={clsx(
                 'cursor-pointer px-3 py-2 text-left text-gray-300 select-none',
-                'data-focus:bg-purple-700 data-focus:text-white data-focus:outline-hidden'
+                'data-focus:bg-[var(--color-theme-primary-700)] data-focus:text-white data-focus:outline-hidden'
               )}>
               <span className='block truncate'>{option.label}</span>
             </ComboboxOption>

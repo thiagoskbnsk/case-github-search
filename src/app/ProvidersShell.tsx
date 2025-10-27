@@ -1,5 +1,9 @@
-import { ReactQueryProvider } from '@shared/providers'
+import { ReactQueryProvider, ThemeProvider } from '@shared/providers'
 
 export const ProvidersShell = ({ children }: React.PropsWithChildren) => {
-  return <ReactQueryProvider>{children}</ReactQueryProvider>
+  return (
+    <ThemeProvider>
+      <ReactQueryProvider>{children}</ReactQueryProvider>
+    </ThemeProvider>
+  )
 }

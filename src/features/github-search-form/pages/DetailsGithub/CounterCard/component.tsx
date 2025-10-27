@@ -9,10 +9,10 @@ export const CounterCard = memo(({ counter }: CounterCardProps) => {
 
   return (
     <div className='cc-card flex flex-col justify-between p-6'>
-      <span className='text-md flex items-center gap-1 text-gray-300'>
+      <span className='text-md flex items-center gap-1 text-white/60'>
         <Icon width={20} /> {counter.label}
       </span>
-      <div className='mt-1 text-3xl font-medium tracking-tight text-purple-400'>
+      <div className='mt-1 text-3xl font-medium tracking-tight text-[var(--color-theme-primary-400)]'>
         <span>{counter.value}</span>
       </div>
     </div>

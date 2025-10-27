@@ -1,17 +1,12 @@
 import { memo } from 'react'
-import { clsx } from 'clsx'
 
 import type { LanguageBadgeProps } from './types'
 
 export const LanguageBadge = memo(({ language, hasLanguage }: LanguageBadgeProps) => {
-  const languageColor = hasLanguage ? 'cyan' : 'gray'
+  const badgeClass = hasLanguage ? 'badge-primary' : 'badge-secondary'
 
   return (
-    <span
-      className={clsx(
-        'rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap ring-1 ring-inset',
-        `bg-${languageColor}-500/10 ring-${languageColor}-500/10 text-${languageColor}-500`
-      )}>
+    <span className={`rounded-md px-2 py-1 text-xs font-medium whitespace-nowrap ring-1 ring-inset ${badgeClass}`}>
       {language}
     </span>
   )

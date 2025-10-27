@@ -5,7 +5,13 @@ import { GithubSearchContext } from './context'
 import type { Selector } from './types'
 
 export const useGithubSearch = <T>(selector: Selector<T>) =>
-  useContextSelector(GithubSearchContext, state => selector(state))
+  useContextSelector(GithubSearchContext, state => {
+    if (!state) {
+      throw new Error('useGithubSearch must be used within GithubSearchProvider')
+    }
+
+    return selector(state)
+  })
 
 export const useSearchResults = () =>
   useGithubSearch(state => ({

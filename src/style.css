@@ -1,23 +1,16 @@
 @import 'tailwindcss';
 
-@source inline("bg-cyan-500/10 ring-cyan-500/10 text-cyan-500 " +
- "bg-purple-400/10 ring-purple-400/10 text-purple-400");
+@source inline("var(--color-yellow-400) var(--color-base-mindfulness) var(--color-base-deep-ocean) var(--color-base-sunset-flame)");
 
 @theme {
-  /* Colors */
-  --color-custom-purple-900: #1a0f2e;
-  --color-custom-purple-800: #2d1b4e;
-  --color-custom-purple-700: #3d1e63;
-  --color-custom-purple-600: #462a6a;
-  --color-custom-violet-500: #615fff;
-  --color-custom-gray-300: #d1d5db;
-
-  /* Shadow */
   --shadow-color: rgba(0, 0, 0, 0.4);
   --shadow-card: 0px 0px 6px var(--shadow-color);
 
-  /* Typography */
   --font-sans: system-ui, Avenir, Helvetica, Arial, sans-serif;
+
+  --color-base-mindfulness: #7c3aed;
+  --color-base-deep-ocean: #38a1ff;
+  --color-base-sunset-flame: #fa8f3e;
 }
 
 :root {
@@ -25,6 +18,38 @@
   text-rendering: optimizeLegibility;
 
   @apply bg-black text-white antialiased;
+
+  --theme-loading-color: var(--color-theme-primary-100);
+  --theme-gradient: linear-gradient(145deg, var(--color-black) 0%, var(--color-theme-primary-800) 100%);
+}
+
+:root[data-theme='mindfulness'] {
+  --color-theme-primary-100: #ece4fe;
+  --color-theme-primary-400: #7c3aed;
+  --color-theme-primary-500: #6c28d9;
+  --color-theme-primary-600: #5b21b6;
+  --color-theme-primary-800: #38146f;
+  --color-theme-primary-900: #250e4c;
+}
+
+/* Blue Theme */
+:root[data-theme='deep-ocean'] {
+  --color-theme-primary-100: #dbf0ff;
+  --color-theme-primary-400: #38a1ff;
+  --color-theme-primary-500: #0ea5e9;
+  --color-theme-primary-600: #0c4a6e;
+  --color-theme-primary-800: #0a374b;
+  --color-theme-primary-900: #092c3a;
+}
+
+/* Green Theme */
+:root[data-theme='sunset-flame'] {
+  --color-theme-primary-100: #ffead8;
+  --color-theme-primary-400: #fa8f3e;
+  --color-theme-primary-500: #ef7722;
+  --color-theme-primary-600: #d8621c;
+  --color-theme-primary-800: #953d13;
+  --color-theme-primary-900: #73300f;
 }
 
 body {
@@ -33,13 +58,14 @@ body {
   &::before {
     content: '';
     @apply fixed inset-0 -z-10 h-screen w-full bg-black;
-    background-image: linear-gradient(145deg, var(--color-black) 0%, var(--color-custom-purple-700) 100%);
+
+    background-image: var(--theme-gradient);
   }
 }
 
 @layer components {
   .cc-card {
-    @apply shadow-card block rounded-md border border-[var(--color-custom-purple-600)] bg-black/35;
+    @apply shadow-card block rounded-md border border-[var(--color-theme-primary-400)]/20 bg-black/35;
   }
 
   .cc-grid-template {
@@ -48,7 +74,7 @@ body {
 
   .cc-scrollbar {
     @apply overflow-auto;
-    scrollbar-color: var(--color-custom-purple-900) var(--color-custom-gray-300);
+    scrollbar-color: var(--color-theme-primary-900) var(--color-gray-400);
     scrollbar-width: thin;
 
     &::-webkit-scrollbar {
@@ -56,15 +82,24 @@ body {
     }
 
     &::-webkit-scrollbar-track {
-      @apply bg-custom-purple-900;
+      @apply bg-[var(--color-theme-primary-900)];
     }
 
     &::-webkit-scrollbar-thumb {
-      @apply bg-custom-purple-900 rounded;
+      @apply rounded bg-[var(--color-theme-primary-900)];
     }
 
     &::-webkit-scrollbar-thumb:hover {
-      @apply bg-custom-purple-800;
+      @apply bg-[var(--color-theme-primary-800)];
     }
+  }
+
+  /* Badge styles */
+  .badge-primary {
+    color: var(--color-yellow-400);
+  }
+
+  .badge-secondary {
+    color: color-mix(in srgb, var(--color-white) 30%, transparent);
   }
 }

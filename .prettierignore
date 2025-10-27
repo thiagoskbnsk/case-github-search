@@ -7,3 +7,4 @@ coverage
 .idea
 *.min.js
 *-lock.yaml
+.github/**/*.md
