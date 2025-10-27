@@ -1,14 +1,15 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
 
-import { EventDebugger } from '@shared/components'
-
 import { AppLayout } from './AppLayout'
 
 const NotFoundPage = lazy(() => import('./pages/NotFound'))
 const GithubSearchFormRouter = lazy(() => import('@features/github-search-form/Router'))
+const EventDebugger = lazy(() => import('@shared/components/ui/EventDebugger'))
 
 export const AppRouter = () => {
+  const shouldEnableDebugger = import.meta.env.DEV
+
   return (
     <BrowserRouter>
       <Suspense>
@@ -19,7 +20,7 @@ export const AppRouter = () => {
           </Route>
         </Routes>
       </Suspense>
-      <EventDebugger />
+      {shouldEnableDebugger && <EventDebugger />}
     </BrowserRouter>
   )
 }

@@ -1,14 +1,31 @@
+import { clsx } from 'clsx'
+
 import type { ButtonProps } from './types'
 
-export const Button = ({ children, onClick, className, disabled, type = 'button' }: ButtonProps) => {
+const variantStyles = {
+  primary:
+    'bg-[var(--color-theme-primary-400)] hover:bg-[var(--color-theme-primary-500)] focus:outline-[var(--color-theme-primary-600)]',
+  danger: 'bg-red-600 hover:bg-red-700 focus:outline-red-800',
+}
+
+export const Button = ({
+  children,
+  onClick,
+  className,
+  disabled,
+  type = 'button',
+  variant = 'primary',
+}: ButtonProps) => {
   return (
     <button
       type={type}
       onClick={onClick}
-      className={`cursor-pointer rounded-md px-3 py-2 text-sm font-semibold text-white focus:relative ${className}
-        bg-[var(--color-theme-primary-400)] transition-colors hover:bg-[var(--color-theme-primary-500)] focus:outline-2
-        focus:-outline-offset-2 focus:outline-[var(--color-theme-primary-600)] disabled:cursor-not-allowed
-        disabled:opacity-60`}
+      className={clsx(
+        `cursor-pointer rounded-md px-3 py-2 text-sm font-semibold text-white transition-colors focus:relative
+        focus:outline-2 focus:-outline-offset-2 disabled:cursor-not-allowed disabled:opacity-60`,
+        variantStyles[variant],
+        className
+      )}
       disabled={disabled}>
       {children}
     </button>
