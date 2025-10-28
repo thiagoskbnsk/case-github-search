@@ -1,7 +1,7 @@
 import {
   SORT_OPTIONS,
   type SortOptionValues,
-} from '@/features/github-search-form/pages/SearchGithub/SearchResults/Filter/filters'
+} from '@features/github-search-form/pages/SearchGithub/SearchResults/Filter/filters'
 import { useSearchFilters } from '@features/github-search-form/providers'
 import { Select } from '@shared/components'
 

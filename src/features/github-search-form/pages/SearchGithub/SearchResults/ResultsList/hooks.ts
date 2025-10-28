@@ -5,7 +5,7 @@ import { useNavigate } from 'react-router'
 import { useResultsList, useGithubSearchPagination } from '@features/github-search-form/providers'
 import { useEvents } from '@shared/events/useEvents'
 
-import type { RepositoryUI } from '../../../../api/github'
+import type { RepositoryUI } from '@features/github-search-form/api/github'
 
 export const useResultsListLogic = () => {
   const { repositories } = useResultsList()

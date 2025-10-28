@@ -1,7 +1,7 @@
 import { useState, useEffect, useMemo } from 'react'
 
 import { ThemeContext } from './context'
-import { getStoredTheme } from './selectors'
+import { getStoredTheme } from './helpers'
 import { THEME_STORAGE_KEY, DEFAULT_THEME } from './constants'
 
 import type { Theme } from './types'
