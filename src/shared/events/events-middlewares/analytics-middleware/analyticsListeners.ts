@@ -3,6 +3,7 @@ import { createListeners } from '../../events-utils'
 export const ANALYTICS_EVENT_LISTENERS = createListeners([
   {
     type: 'PAGE_VIEW',
+    name: 'Analytics - Page View',
     handler: event => {
       const { path, title } = event.payload
       console.log(`[Analytics] Page view: ${title} (${path})`)
@@ -10,6 +11,7 @@ export const ANALYTICS_EVENT_LISTENERS = createListeners([
   },
   {
     type: 'CARD_CLICK',
+    name: 'Analytics - Card Click',
     handler: event => {
       const { repositoryId, repository } = event.payload
       console.log(`[Analytics] Card clicked: ${repository.name} (ID: ${repositoryId})`)
@@ -17,6 +19,7 @@ export const ANALYTICS_EVENT_LISTENERS = createListeners([
   },
   {
     type: 'SEARCH_SUBMIT',
+    name: 'Analytics - Search Submit',
     handler: event => {
       const { query, timestamp } = event.payload
       console.log(`[Analytics] Search submitted: "${query}" at ${new Date(timestamp).toISOString()}`)
@@ -24,6 +27,7 @@ export const ANALYTICS_EVENT_LISTENERS = createListeners([
   },
   {
     type: 'SEARCH_PAGINATION',
+    name: 'Analytics - Search Pagination',
     handler: event => {
       const { query, pageNumber, trigger } = event.payload
       console.log(`[Analytics] Search pagination: Page ${pageNumber} for "${query}" (trigger: ${trigger})`)
@@ -31,6 +35,7 @@ export const ANALYTICS_EVENT_LISTENERS = createListeners([
   },
   {
     type: 'SEARCH_NO_RESULTS',
+    name: 'Analytics - No Results',
     handler: event => {
       const { query, timestamp } = event.payload
       console.log(`[Analytics] No results found for: "${query}" at ${new Date(timestamp).toISOString()}`)

@@ -101,7 +101,6 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
     if (hasNextPage && !isFetchingNextPage) {
       const nextPage = currentPage + 1
 
-      // Dispatch SEARCH_PAGINATION event
       emit('SEARCH_PAGINATION', {
         query: lastSearched,
         pageNumber: nextPage,

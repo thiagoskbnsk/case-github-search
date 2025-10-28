@@ -104,5 +104,6 @@ export type EventTypeKeys = keyof EventPayloadMap
 
 export type EventListenerConfig<T extends EventTypeKeys = EventTypeKeys> = {
   type: T
+  name: string
   handler: (event: Extract<AppEvent, { type: T }>) => void | Promise<void>
 }

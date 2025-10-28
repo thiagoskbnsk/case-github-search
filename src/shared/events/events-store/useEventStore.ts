@@ -7,7 +7,6 @@ import {
   ANALYTICS_EVENT_LISTENERS,
   eventLoggingMiddleware,
   LOGGING_EVENT_LISTENERS,
-  PERFORMANCE_EVENT_LISTENERS,
 } from '../events-middlewares'
 import { composeMiddlewares, registerGlobalListeners } from '../events-utils'
 import { baseStoreImplementation } from './baseEventStore'
@@ -27,11 +26,7 @@ const createEventStore = (baseStore: StateCreator<EventStore, [], [], EventStore
 
   const store = create(composedStore)
 
-  registerGlobalListeners(store.getState(), [
-    ANALYTICS_EVENT_LISTENERS,
-    LOGGING_EVENT_LISTENERS,
-    PERFORMANCE_EVENT_LISTENERS,
-  ])
+  registerGlobalListeners(store.getState(), [ANALYTICS_EVENT_LISTENERS, LOGGING_EVENT_LISTENERS])
 
   return store
 }
