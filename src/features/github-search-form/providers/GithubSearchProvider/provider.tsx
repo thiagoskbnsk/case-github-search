@@ -25,6 +25,7 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
     fetchNextPage,
     hasNextPage,
     isFetchingNextPage,
+    promise: fetchSearchResultsPromise,
   } = useInfiniteQuery({
     queryKey: ['github-search', lastSearched],
     queryFn: ({ pageParam }) => fetchSearchResults(lastSearched, pageParam),
@@ -36,6 +37,7 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
     refetchOnMount: false,
     refetchOnWindowFocus: false,
     enabled: Boolean(lastSearched),
+    experimental_prefetchInRender: true,
   })
 
   const { pages } = data
@@ -130,6 +132,7 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       isFetchingNextPage,
       currentPage,
       maxPages: MAX_PAGES,
+      fetchSearchResultsPromise,
     }),
     [
       sortFilter,
@@ -148,6 +151,7 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       hasNextPage,
       isFetchingNextPage,
       currentPage,
+      fetchSearchResultsPromise,
     ]
   )
 

@@ -21,6 +21,7 @@ export const useSearchResults = () =>
       error: state.error,
       noResults: state.noResults,
       shouldShowResults: hasSearched,
+      fetchSearchResultsPromise: state.fetchSearchResultsPromise,
     }
   })
 
@@ -38,6 +39,7 @@ export const useSearchFilters = () =>
     setSortFilter: state.setSortFilter,
     setLanguageFilter: state.setLanguageFilter,
     languageOptions: state.languageOptions,
+    isLoading: state.isLoading,
   }))
 
 export const useResultsList = () =>

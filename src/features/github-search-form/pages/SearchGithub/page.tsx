@@ -5,6 +5,7 @@ import { useDocumentMetadata } from '@shared/hooks'
 
 import { DEFAULT_TEXTS } from './placeholders'
 import { SearchForm } from './SearchForm'
+import { SkeletonSearchResults } from './SearchResults'
 import { useSearchResults } from '../../providers'
 
 const SearchResults = lazy(() => import('./SearchResults'))
@@ -26,7 +27,7 @@ export const SearchGithub = () => {
       <div className='cc-grid-template gap-3'>
         <SearchForm />
 
-        <SuspenseWrapper isFetching={shouldShowResults} loadingFallback={null}>
+        <SuspenseWrapper isFetching={shouldShowResults} loadingFallback={<SkeletonSearchResults />}>
           <SearchResults />
         </SuspenseWrapper>
       </div>

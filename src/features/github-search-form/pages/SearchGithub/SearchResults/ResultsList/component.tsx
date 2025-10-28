@@ -1,7 +1,7 @@
 import { Card } from './Card'
-import { EndOfResults } from '../EndOfResults'
-import { InfiniteScrollTrigger } from '../InfiniteScrollTrigger'
+import { EndOfResults } from './EndOfResults'
 import { useResultsListLogic } from './hooks'
+import { InfiniteScrollTrigger } from './InfiniteScrollTrigger'
 
 export const ResultsList = () => {
   const { repositories, hasNextPage, showEndMessage, handleClick, parentRef, virtualizer } = useResultsListLogic()
@@ -11,7 +11,7 @@ export const ResultsList = () => {
   return (
     <div ref={parentRef} className='w-full'>
       <div
-        className='relative mb-4 w-full'
+        className='relative w-full'
         style={{
           height: `${virtualizer.getTotalSize()}px`,
         }}>

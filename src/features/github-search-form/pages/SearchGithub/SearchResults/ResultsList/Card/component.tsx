@@ -52,7 +52,7 @@ export const Card = memo(
           </div>
         </div>
         <div className='p-4 text-left text-sm'>
-          <p className={clsx('break-words', hasDescription ? 'text-white/80' : 'text-white/30 italic')}>
+          <p className={clsx('line-clamp-2 break-words', hasDescription ? 'text-white/80' : 'text-white/30 italic')}>
             {displayDescription}
           </p>
         </div>
