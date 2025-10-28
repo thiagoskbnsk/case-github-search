@@ -1,9 +1,10 @@
 import { Component, type ErrorInfo, type ReactNode } from 'react'
 
 import { Button } from '@shared/components'
+import { useEventStore } from '@shared/events/events-store'
 import { isProd } from '@shared/utils'
 
-import { ERROR_BOUNDARY_CONSOLE, ERROR_BOUNDARY_TEXTS } from './placeholders'
+import { ERROR_BOUNDARY_TEXTS } from './placeholders'
 
 import type { ErrorBoundaryProps, ErrorBoundaryState } from './types'
 
@@ -20,9 +21,14 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     this.setState({ errorInfo })
 
-    if (!isProd) {
-      console.error(ERROR_BOUNDARY_CONSOLE.errorCaught, error, errorInfo)
-    }
+    // Emit ERROR_BOUNDARY event
+    const eventStore = useEventStore.getState()
+
+    eventStore.emit('ERROR_BOUNDARY', {
+      error: error.message,
+      errorInfo: errorInfo.componentStack || '',
+      componentStack: errorInfo.componentStack || undefined,
+    })
   }
 
   handleReset = () => {

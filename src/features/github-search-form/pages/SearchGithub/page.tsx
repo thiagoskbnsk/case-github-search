@@ -1,6 +1,7 @@
 import { lazy } from 'react'
 
 import { SuspenseWrapper } from '@shared/components'
+import { useDocumentMetadata } from '@shared/hooks'
 
 import { DEFAULT_TEXTS } from './placeholders'
 import { SearchForm } from './SearchForm'
@@ -10,6 +11,8 @@ const SearchResults = lazy(() => import('./SearchResults'))
 
 export const SearchGithub = () => {
   const { shouldShowResults } = useSearchResults()
+
+  useDocumentMetadata({ title: 'Search GitHub Repositories' })
 
   return (
     <div className='relative grid gap-6 text-center'>

@@ -16,11 +16,10 @@ export const useGithubSearch = <T>(selector: Selector<T>) =>
 export const useSearchResults = () =>
   useGithubSearch(state => {
     const hasSearched = Boolean(state.lastSearched)
-    const noResults = hasSearched && state.repositories.length === 0 && !state.error && !state.isLoading
 
     return {
       error: state.error,
-      noResults,
+      noResults: state.noResults,
       shouldShowResults: hasSearched,
     }
   })
@@ -58,7 +57,7 @@ export const useGithubSearchPagination = () =>
     const showEndMessage = !state.hasNextPage && state.currentPage >= state.maxPages
 
     return {
-      fetchNextPage: state.fetchNextPage,
+      handleFetchNextPage: state.handleFetchNextPage,
       hasNextPage: state.hasNextPage,
       isFetchingNextPage: state.isFetchingNextPage,
       currentPage: state.currentPage,

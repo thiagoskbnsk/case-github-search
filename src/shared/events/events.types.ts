@@ -1,3 +1,5 @@
+import type { RepositoryUI } from '../../features/github-search-form/api/github'
+
 type BaseEvent = {
   id: string
   type: string
@@ -6,38 +8,96 @@ type BaseEvent = {
   metadata?: Record<string, unknown>
 }
 
-export interface SearchInitiatedEvent extends BaseEvent {
-  type: 'SEARCH_INITIATED'
+// Analytics Events
+export interface PageViewEvent extends BaseEvent {
+  type: 'PAGE_VIEW'
   payload: {
-    query: string
-    filters?: Record<string, unknown>
+    path: string
+    title: string
   }
 }
 
-export interface SearchCompletedEvent extends BaseEvent {
-  type: 'SEARCH_COMPLETED'
-  payload: {
-    query: string
-    resultCount: number
-    duration: number
-  }
-}
-
-export interface RepositorySelectedEvent extends BaseEvent {
-  type: 'REPOSITORY_SELECTED'
+export interface CardClickEvent extends BaseEvent {
+  type: 'CARD_CLICK'
   payload: {
     repositoryId: number
-    repositoryName: string
-    source: 'search_results' | 'details'
+    repository: RepositoryUI
   }
 }
 
-export type AppEvent = SearchInitiatedEvent | SearchCompletedEvent | RepositorySelectedEvent
+export interface SearchSubmitEvent extends BaseEvent {
+  type: 'SEARCH_SUBMIT'
+  payload: {
+    query: string
+    timestamp: number
+  }
+}
+
+export interface SearchPaginationEvent extends BaseEvent {
+  type: 'SEARCH_PAGINATION'
+  payload: {
+    query: string
+    pageNumber: number
+    trigger: 'scroll' | 'button'
+  }
+}
+
+export interface SearchNoResultsEvent extends BaseEvent {
+  type: 'SEARCH_NO_RESULTS'
+  payload: {
+    query: string
+    timestamp: number
+  }
+}
+
+// Error Monitoring Events
+export interface ErrorBoundaryEvent extends BaseEvent {
+  type: 'ERROR_BOUNDARY'
+  payload: {
+    error: string
+    errorInfo: string
+    componentStack?: string
+  }
+}
+
+export interface SearchErrorEvent extends BaseEvent {
+  type: 'SEARCH_ERROR'
+  payload: {
+    source: string
+    metadata: Record<string, unknown>
+    error: string
+    statusCode?: number
+  }
+}
+
+export interface ValidationErrorEvent extends BaseEvent {
+  type: 'VALIDATION_ERROR'
+  payload: {
+    field: string
+    error: string
+    value: unknown
+  }
+}
+
+export type AppEvent =
+  | PageViewEvent
+  | CardClickEvent
+  | SearchSubmitEvent
+  | SearchPaginationEvent
+  | SearchNoResultsEvent
+  | ErrorBoundaryEvent
+  | SearchErrorEvent
+  | ValidationErrorEvent
 
 export type EventPayloadMap = {
-  SEARCH_INITIATED: SearchInitiatedEvent['payload']
-  SEARCH_COMPLETED: SearchCompletedEvent['payload']
-  REPOSITORY_SELECTED: RepositorySelectedEvent['payload']
+  PAGE_VIEW: PageViewEvent['payload']
+  CARD_CLICK: CardClickEvent['payload']
+  SEARCH_SUBMIT: SearchSubmitEvent['payload']
+  SEARCH_PAGINATION: SearchPaginationEvent['payload']
+  SEARCH_NO_RESULTS: SearchNoResultsEvent['payload']
+  ERROR_BOUNDARY: ErrorBoundaryEvent['payload']
+  SEARCH_ERROR: SearchErrorEvent['payload']
+  VALIDATION_ERROR: ValidationErrorEvent['payload']
 }
 
 export type EventTypeKeys = keyof EventPayloadMap

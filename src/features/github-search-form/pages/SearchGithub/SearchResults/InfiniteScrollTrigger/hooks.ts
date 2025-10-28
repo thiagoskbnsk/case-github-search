@@ -6,7 +6,7 @@ import { useGithubSearchPagination } from '@features/github-search-form/provider
 import { FETCH_COOLDOWN_MS } from './constants'
 
 export const useInfiniteScrollTrigger = () => {
-  const { fetchNextPage, hasNextPage, isFetchingNextPage } = useGithubSearchPagination()
+  const { handleFetchNextPage, hasNextPage, isFetchingNextPage } = useGithubSearchPagination()
   const shouldFetchNextPage = useRef(true)
 
   const { ref: targetRef, inView } = useInView({
@@ -26,10 +26,9 @@ export const useInfiniteScrollTrigger = () => {
   useEffect(() => {
     if (inView && hasNextPage && !isFetchingNextPage && shouldFetchNextPage.current) {
       shouldFetchNextPage.current = false
-
-      fetchNextPage()
+      handleFetchNextPage()
     }
-  }, [inView, hasNextPage, isFetchingNextPage, fetchNextPage])
+  }, [inView, hasNextPage, isFetchingNextPage, handleFetchNextPage])
 
   return {
     targetRef,

@@ -1,5 +1,7 @@
-import { useCallback, useMemo, useState } from 'react'
+import { useCallback, useMemo, useState, useEffect } from 'react'
 import { useInfiniteQuery } from '@tanstack/react-query'
+
+import { useEvents } from '@shared/events'
 
 import { GithubSearchContext } from './context'
 import { getNextPageParam, selectLanguageOptions, handleFilterAndSort, findRepositoryById } from './helpers'
@@ -11,6 +13,7 @@ import type { SortFilter } from './types'
 import type { Option } from '@shared/components'
 
 export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
+  const { emit } = useEvents()
   const [lastSearched, setLastSearched] = useState('')
   const [sortFilter, setSortFilter] = useState<SortFilter>(SORT_OPTIONS[0])
   const [languageFilter, setLanguageFilter] = useState<Option>(DEFAULT_LANGUAGE_FILTER)
@@ -49,6 +52,22 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
     })
   }, [allRepositories, languageFilter, sortFilter])
 
+  // Calculate no results state
+  const noResults = useMemo(() => {
+    const hasSearched = Boolean(lastSearched)
+    return hasSearched && allRepositories.length === 0 && !error && !isLoading
+  }, [lastSearched, allRepositories.length, error, isLoading])
+
+  // Track search completion and no results
+  useEffect(() => {
+    if (noResults) {
+      emit('SEARCH_NO_RESULTS', {
+        query: lastSearched,
+        timestamp: Date.now(),
+      })
+    }
+  }, [noResults, lastSearched, emit])
+
   const clearFilters = useCallback(() => {
     setSortFilter(SORT_OPTIONS[0])
     setLanguageFilter(DEFAULT_LANGUAGE_FILTER)
@@ -59,17 +78,39 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       const isDifferentSearch = inputSearchValue !== lastSearched
 
       if (isDifferentSearch) {
+        if (inputSearchValue) {
+          emit('SEARCH_SUBMIT', {
+            query: inputSearchValue,
+            timestamp: Date.now(),
+          })
+        }
+
         clearFilters()
         setLastSearched(inputSearchValue)
       }
     },
-    [lastSearched, clearFilters]
+    [lastSearched, clearFilters, emit]
   )
 
   const getRepositoryById = useCallback(
     (repositoryId: number) => findRepositoryById(filteredRepositories, repositoryId),
     [filteredRepositories]
   )
+
+  const handleFetchNextPage = useCallback(() => {
+    if (hasNextPage && !isFetchingNextPage) {
+      const nextPage = currentPage + 1
+
+      // Dispatch SEARCH_PAGINATION event
+      emit('SEARCH_PAGINATION', {
+        query: lastSearched,
+        pageNumber: nextPage,
+        trigger: 'scroll',
+      })
+
+      fetchNextPage()
+    }
+  }, [hasNextPage, isFetchingNextPage, currentPage, lastSearched, emit, fetchNextPage])
 
   const value = useMemo(
     () => ({
@@ -79,12 +120,13 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       isLoading,
       error,
       languageOptions,
+      noResults,
       setSortFilter,
       setLanguageFilter,
       handleSearch,
       lastSearched,
       getRepositoryById,
-      fetchNextPage,
+      handleFetchNextPage,
       hasNextPage,
       isFetchingNextPage,
       currentPage,
@@ -97,12 +139,13 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
       isLoading,
       error,
       languageOptions,
+      noResults,
       setSortFilter,
       setLanguageFilter,
       handleSearch,
       lastSearched,
       getRepositoryById,
-      fetchNextPage,
+      handleFetchNextPage,
       hasNextPage,
       isFetchingNextPage,
       currentPage,

@@ -1,4 +1,5 @@
 import { RedirectRoute } from '@shared/components'
+import { useDocumentMetadata } from '@shared/hooks'
 
 import { CounterCard } from './CounterCard'
 import { DetailsGithubHeader } from './DetailsGithubHeader/component'
@@ -8,6 +9,9 @@ import { NOT_FOUND_STATE } from './constants'
 
 export const DetailsGithub = () => {
   const { repository, hasRepository, countersMap, repositoryInfoMap } = useDetailsGithub()
+  useDocumentMetadata({
+    title: `Repository Details - ${repository?.name}`,
+  })
 
   if (!hasRepository) {
     return <RedirectRoute to='/404' state={NOT_FOUND_STATE} />

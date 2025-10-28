@@ -27,7 +27,7 @@ export const ResultsList = () => {
               style={{
                 transform: `translateY(${virtualItem.start}px)`,
               }}>
-              <Card repository={repository} onClick={() => handleClick(repository.id)} />
+              <Card repository={repository} onClick={() => handleClick(repository.id, repository)} />
             </div>
           )
         })}

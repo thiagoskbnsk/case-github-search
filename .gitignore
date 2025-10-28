@@ -24,3 +24,7 @@ dist-ssr
 
 # Testing
 coverage
+
+# remove it later
+.github/chatmodes
+.github/instructions

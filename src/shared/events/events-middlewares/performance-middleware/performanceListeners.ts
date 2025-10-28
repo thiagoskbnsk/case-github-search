@@ -2,7 +2,7 @@ import { createListeners } from '../../events-utils'
 
 export const PERFORMANCE_EVENT_LISTENERS = createListeners([
   {
-    type: 'REPOSITORY_SELECTED',
+    type: 'CARD_CLICK',
     handler: async event => {
       const { repositoryId } = event.payload
 

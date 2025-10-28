@@ -8,7 +8,6 @@ export const isDev = import.meta.env.DEV
 /**
  * Event middleware configuration
  */
-export const isDevToolsMiddlewareEnabled = import.meta.env.VITE_DEVTOOLS_MIDDLEWARE_ENABLED === 'true'
 export const isEventLoggingMiddlewareEnabled = import.meta.env.VITE_EVENT_LOGGING_MIDDLEWARE_ENABLED === 'true'
 export const isAnalyticsMiddlewareEnabled = import.meta.env.VITE_ANALYTICS_MIDDLEWARE_ENABLED === 'true'
 

@@ -11,12 +11,13 @@ export type GithubSearchState = {
   isLoading: boolean
   error: Error | null
   languageOptions: Option[]
+  noResults: boolean
   setSortFilter: (sort: SortFilter) => void
   setLanguageFilter: (language: Option) => void
   handleSearch: (inputSearch: string) => void
   lastSearched: string
   getRepositoryById: (repositoryId: number) => RepositoryUI | null
-  fetchNextPage: () => void
+  handleFetchNextPage: () => void
   hasNextPage: boolean
   isFetchingNextPage: boolean
   currentPage: number

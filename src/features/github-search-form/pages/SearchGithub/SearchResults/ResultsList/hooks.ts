@@ -5,6 +5,8 @@ import { useNavigate } from 'react-router'
 import { useResultsList, useGithubSearchPagination } from '@features/github-search-form/providers'
 import { useEvents } from '@shared/events/useEvents'
 
+import type { RepositoryUI } from '../../../../api/github'
+
 export const useResultsListLogic = () => {
   const { repositories } = useResultsList()
   const { hasNextPage, showEndMessage } = useGithubSearchPagination()
@@ -20,11 +22,10 @@ export const useResultsListLogic = () => {
   })
 
   const handleClick = useCallback(
-    (id: number) => {
-      emit('REPOSITORY_SELECTED', {
+    (id: number, repository: RepositoryUI) => {
+      emit('CARD_CLICK', {
         repositoryId: id,
-        repositoryName: 'EXAMPLE',
-        source: 'search_results',
+        repository,
       })
 
       navigate(`/repository/${id}`)
