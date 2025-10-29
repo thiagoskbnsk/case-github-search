@@ -4,6 +4,8 @@ export type TextFieldProps = {
   label: string
   value?: string
   onChange?: (event: React.ChangeEvent<HTMLInputElement>) => void
+  onBlur?: (event: React.FocusEvent<HTMLInputElement>) => void
+  onKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void
   disabled?: boolean
   error?: string
   id?: string

@@ -16,6 +16,7 @@ export const useSearchForm = () => {
     control,
     handleSubmit,
     reset,
+    setValue,
     formState: { isSubmitting, errors },
   } = useForm<SearchFormData>({
     mode: 'onSubmit',
@@ -24,7 +25,19 @@ export const useSearchForm = () => {
   })
   const searchValue = useWatch({ control, name: SEARCH_FIELD_NAME })
 
-  const onSubmit = useCallback((data: SearchFormData) => handleSearch(data[SEARCH_FIELD_NAME]), [handleSearch])
+  const onSubmit = useCallback(
+    (data: SearchFormData) => {
+      const inputValue = data[SEARCH_FIELD_NAME]
+      const trimmedValue = inputValue.trim()
+
+      if (trimmedValue !== inputValue) {
+        setValue(SEARCH_FIELD_NAME, trimmedValue)
+      }
+
+      return handleSearch(trimmedValue)
+    },
+    [handleSearch, setValue]
+  )
 
   const handleClear = useCallback(() => {
     reset()

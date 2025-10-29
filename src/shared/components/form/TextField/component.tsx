@@ -13,11 +13,13 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       onChange,
       name,
       disabled,
+      onBlur,
       error,
       id: providedId,
       className,
       loading,
       onClear,
+      onKeyDown,
       value,
     }: TextFieldProps,
     ref
@@ -47,6 +49,8 @@ export const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
               value={value}
               onChange={onChange}
               aria-label={label}
+              onBlur={onBlur}
+              onKeyDown={onKeyDown}
               disabled={disabled || loading}
               aria-invalid={!!error}
               placeholder={placeholder}

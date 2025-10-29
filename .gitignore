@@ -28,3 +28,10 @@ coverage
 # remove it later
 .github/chatmodes
 .github/instructions
+
+# Playwright
+/test-results/
+/playwright-report/
+/blob-report/
+/playwright/.cache/
+/playwright/.auth/

@@ -76,6 +76,7 @@ export interface ValidationErrorEvent extends BaseEvent {
     field: string
     error: string
     value: unknown
+    metadata?: Record<string, unknown>
   }
 }
 

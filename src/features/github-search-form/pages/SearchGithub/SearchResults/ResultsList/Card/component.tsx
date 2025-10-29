@@ -12,8 +12,10 @@ export const Card = memo(
     onClick,
   }: CardProps) => {
     return (
-      <div
+      <article
         onClick={onClick}
+        data-testid='repository-card'
+        aria-label={`${owner.name}/${name} repository`}
         className='cc-card origin-center cursor-pointer rounded-md opacity-60 transition-all duration-200 ease-in-out
           will-change-transform hover:scale-[1.02] hover:opacity-100'>
         <div className='flex items-center justify-between border-b border-white/10 p-4'>
@@ -56,7 +58,7 @@ export const Card = memo(
             {displayDescription}
           </p>
         </div>
-      </div>
+      </article>
     )
   }
 )
