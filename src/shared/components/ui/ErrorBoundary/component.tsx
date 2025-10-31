@@ -37,7 +37,19 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
 
   render(): ReactNode {
     if (this.state.hasError) {
-      if (!isProd) {
+      // If a fallback prop is provided, use it
+      if (this.props.fallback) {
+        return typeof this.props.fallback === 'function'
+          ? this.props.fallback({
+              error: this.state.error,
+              errorInfo: this.state.errorInfo,
+              reset: this.handleReset,
+            })
+          : this.props.fallback
+      }
+
+      // Otherwise, use default UI (dev only)
+      if (isProd) {
         return (
           <div className='flex min-h-screen items-center justify-center bg-[var(--color-theme-primary-900)] p-8'>
             <div className='max-w-md rounded-lg bg-black/50 p-8 text-center shadow-lg'>

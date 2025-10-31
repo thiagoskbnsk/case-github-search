@@ -18,13 +18,16 @@ export abstract class BaseHttpClient {
   private shouldRetryError(error: ApiError): boolean {
     const { status } = error
 
+    // No status means network error or unknown - allow retry
     if (!status) return true
 
-    // Don't retry client errors (4xx) except rate limiting (429)
-    const isClientError = status >= HTTP_STATUS.BAD_REQUEST && status < HTTP_STATUS.INTERNAL_SERVER_ERROR
-    const isRateLimitError = status === HTTP_STATUS.TOO_MANY_REQUESTS
+    // Don't retry any HTTP errors (4xx or 5xx)
+    // Let React Query handle retry logic at a higher level
+    const isHttpError = status >= HTTP_STATUS.BAD_REQUEST
+    if (isHttpError) return false
 
-    return !isClientError || isRateLimitError
+    // Allow retry for network errors and other non-HTTP errors
+    return true
   }
 
   private classifyError(error: unknown): ApiError {
@@ -83,7 +86,11 @@ export abstract class BaseHttpClient {
         lastError = this.classifyError(error)
 
         const isTimeoutError = lastError.status === HTTP_STATUS.TIMEOUT
-        if (isTimeoutError || !this.shouldRetryError(lastError)) break
+        const shouldNotRetry = !this.shouldRetryError(lastError)
+
+        if (isTimeoutError || shouldNotRetry) {
+          break
+        }
 
         const shouldRetry = attempt < maxRetries
         if (shouldRetry) await delay(retryDelay || BASE_CONFIG.retryDelay!)

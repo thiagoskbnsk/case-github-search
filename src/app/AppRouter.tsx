@@ -1,7 +1,7 @@
 import { lazy, Suspense } from 'react'
 import { BrowserRouter, Routes, Route } from 'react-router'
 
-import { isDev } from '@shared/utils'
+import { isDev, isTestMode } from '@shared/utils'
 
 import { AppLayout } from './AppLayout'
 
@@ -22,7 +22,7 @@ export const AppRouter = () => {
         </Routes>
       </Suspense>
 
-      {isDev && (
+      {isDev && !isTestMode && (
         <>
           <EventDebugger />
           <ErrorTest />

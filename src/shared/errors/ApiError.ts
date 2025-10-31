@@ -7,9 +7,16 @@ import { BaseError } from './BaseError'
  * Automatically extracts caller information and emits SEARCH_ERROR event
  */
 export class ApiError extends BaseError {
+  status?: number
+
   constructor(originalError: unknown, metadata?: Record<string, unknown>) {
     const errorMessage = originalError instanceof Error ? originalError.message : 'Unknown error'
     super(`API Error: ${errorMessage}`, originalError, metadata)
+
+    // Preserve status from original error
+    if (typeof originalError === 'object' && originalError !== null && 'status' in originalError) {
+      this.status = (originalError as { status?: number }).status
+    }
 
     const eventStore = useEventStore.getState()
 
@@ -17,7 +24,7 @@ export class ApiError extends BaseError {
       source: this.getContext(),
       metadata: this.metadata || {},
       error: errorMessage,
-      statusCode: metadata?.statusCode as number | undefined,
+      statusCode: this.status,
     })
   }
 }

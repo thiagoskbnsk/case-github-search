@@ -5,7 +5,7 @@ export const GITHUB_API = {
     'User-Agent': 'GitHub-Search-App',
   },
   retries: 2,
-  timeout: 10000,
+  timeout: 5000,
 } as const
 
 export const GITHUB_CACHE = {

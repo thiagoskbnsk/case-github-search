@@ -1,3 +1,5 @@
+import type { Page } from '@playwright/test'
+
 // Valid search terms for testing
 export const VALID_SEARCH_TERMS = ['react', 'vue', 'angular', 'svelte', 'typescript', 'javascript']
 
@@ -18,7 +20,7 @@ export const EDGE_CASE_SEARCHES = {
 }
 
 // UI selectors and labels
-export const SELECTORS = {
+export const SELECTORS: Record<string, { role: Parameters<Page['getByRole']>[0]; name?: string | RegExp }> = {
   searchInput: { role: 'textbox', name: /Search GitHub repositories/i },
   searchButton: { role: 'button', name: /^Search$/i },
   repositoryCard: { role: 'article' },
@@ -40,7 +42,6 @@ export const EXPECTED_TEXTS = {
   noMoreResults: /No more results/i,
   pageNotFound: /Page not found/i,
   goBackHome: /Go back home/i,
-  repoNotFound: /Repo Not Found|Page not found/i,
 }
 
 // Error messages
@@ -75,3 +76,12 @@ export const PAGINATION = {
   maxPages: 3,
   scrollIterations: 2,
 }
+
+// GitHub API constants (duplicated for E2E to avoid importing from src)
+export const GITHUB_API = {
+  baseUrl: 'https://api.github.com',
+} as const
+
+export const GITHUB_ENDPOINTS = {
+  SEARCH_REPOSITORIES: '/search/repositories',
+} as const

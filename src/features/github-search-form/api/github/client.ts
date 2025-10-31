@@ -10,6 +10,7 @@ export class GithubService extends HttpClient {
   constructor() {
     super(GITHUB_API.baseUrl, {
       retries: GITHUB_API.retries,
+      timeout: GITHUB_API.timeout,
       headers: GITHUB_API.headers,
     })
   }

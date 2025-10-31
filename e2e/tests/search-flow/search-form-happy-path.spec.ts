@@ -1,7 +1,18 @@
-﻿import { VALID_SEARCH_TERMS, EXPECTED_TEXTS } from '../fixtures/search-test-data'
-import { test, expect } from '../fixtures/test-fixtures'
+﻿import { VALID_SEARCH_TERMS, EXPECTED_TEXTS } from '../../fixtures/constants'
+import { test, expect } from '../../fixtures/base'
+import { mockJsonResponse, setupApiMocks } from '../../fixtures/mockApi'
+import { generateSearchResponse } from '../../fixtures/mockDataGenerators'
 
 test.describe('Search Form - Happy Path', () => {
+  test.beforeEach(async ({ page }) => {
+    await setupApiMocks(page, [
+      {
+        pattern: '/search/repositories',
+        handler: mockJsonResponse(generateSearchResponse(), { delay: 1000 }),
+      },
+    ])
+  })
+
   test('should display search form on home page', async ({ searchPage }) => {
     await test.step('Verify page title', async () => {
       await expect(searchPage.page).toHaveTitle(EXPECTED_TEXTS.pageTitle)

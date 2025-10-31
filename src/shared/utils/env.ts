@@ -4,6 +4,7 @@
  */
 export const isProd = import.meta.env.PROD
 export const isDev = import.meta.env.DEV
+export const isTestMode = import.meta.env.VITE_E2E_TEST_MODE === 'true'
 
 /**
  * Event middleware configuration

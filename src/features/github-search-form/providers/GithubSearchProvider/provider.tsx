@@ -34,8 +34,6 @@ export const GithubSearchProvider = ({ children }: React.PropsWithChildren) => {
     maxPages: MAX_PAGES,
     staleTime: GITHUB_CACHE.ttl,
     gcTime: GITHUB_CACHE.ttl * 2,
-    refetchOnMount: false,
-    refetchOnWindowFocus: false,
     enabled: Boolean(lastSearched),
     experimental_prefetchInRender: true,
   })

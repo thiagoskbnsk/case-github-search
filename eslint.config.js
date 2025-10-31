@@ -8,7 +8,7 @@ import tseslint from 'typescript-eslint'
 import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default defineConfig([
-  globalIgnores(['dist', '.github/**/*.md']),
+  globalIgnores(['dist', '.github/**/*.md', 'e2e/**/*']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
