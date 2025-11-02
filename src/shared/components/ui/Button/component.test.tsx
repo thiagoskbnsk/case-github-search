@@ -13,6 +13,7 @@ const DEFAULT_PROPS: ButtonProps = {
 const createComponent = (additionalProps: Partial<ButtonProps> = {}) => {
   return render(<Button {...DEFAULT_PROPS} {...additionalProps} />)
 }
+
 describe('Button', () => {
   it('renders with children', () => {
     createComponent()

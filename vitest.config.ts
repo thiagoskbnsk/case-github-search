@@ -1,3 +1,5 @@
+import path from 'path'
+
 import { defineConfig } from 'vitest/config'
 
 export default defineConfig({
@@ -9,5 +11,12 @@ export default defineConfig({
       reporter: ['text', 'html'],
     },
     exclude: ['e2e/**', 'node_modules'],
+  },
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+      '@features': path.resolve(__dirname, './src/features'),
+      '@shared': path.resolve(__dirname, './src/shared'),
+    },
   },
 })
