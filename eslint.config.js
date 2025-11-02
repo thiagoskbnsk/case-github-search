@@ -2,13 +2,14 @@ import js from '@eslint/js'
 import importPlugin from 'eslint-plugin-import'
 import reactHooks from 'eslint-plugin-react-hooks'
 import reactRefresh from 'eslint-plugin-react-refresh'
+import storybook from 'eslint-plugin-storybook'
 import { defineConfig, globalIgnores } from 'eslint/config'
 import globals from 'globals'
 import tseslint from 'typescript-eslint'
 import pluginQuery from '@tanstack/eslint-plugin-query'
 
 export default defineConfig([
-  globalIgnores(['dist', '.github/**/*.md', 'e2e/**/*']),
+  globalIgnores(['dist', '.github/**/*.md', 'e2e/**/*', 'storybook-static']),
   {
     files: ['**/*.{ts,tsx}'],
     extends: [
@@ -84,5 +85,13 @@ export default defineConfig([
       },
     },
     ignores: ['node_modules/', 'dist/', 'coverage/', 'public/', '*.min.js'],
+  },
+  ...storybook.configs['flat/recommended'],
+  {
+    files: ['**/*.stories.{ts,tsx}'],
+    rules: {
+      'import/no-anonymous-default-export': 'off',
+      'react-hooks/rules-of-hooks': 'off',
+    },
   },
 ])
