@@ -49,7 +49,7 @@ export class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundarySt
       }
 
       // Otherwise, use default UI (dev only)
-      if (isProd) {
+      if (!isProd) {
         return (
           <div className='flex min-h-screen items-center justify-center bg-[var(--color-theme-primary-900)] p-8'>
             <div className='max-w-md rounded-lg bg-black/50 p-8 text-center shadow-lg'>
